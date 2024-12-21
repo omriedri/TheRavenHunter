@@ -1,0 +1,7 @@
+{
+    "require": {
+        "rakit/validation": "^1.4",
+        "aternos/model": "^3.2",
+        "vlucas/phpdotenv": "^5.6"
+    }
+}
