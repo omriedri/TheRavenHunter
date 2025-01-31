@@ -1,0 +1,68 @@
+settings {
+    display: none;
+    padding: 25px;
+    animation-name: fadeInOpacity;
+    animation-duration: .15s;
+    animation-timing-function: steps(cubic-bezier(0.19, 1, 0.22, 1));
+}
+
+settings.active {
+    display: block;
+}
+
+settings .heading {
+    text-align: center;
+}
+
+settings .wrappers h4 {
+    background: black;
+    color: white;
+    margin: -25px -24px 20px -24px;
+    padding: 10px 10px 10px 20px;
+    border-radius: 25px 25px 0 0;
+}
+
+settings input[type=radio], settings input[type=checkbox] {
+    transform: scale(1.5);
+    margin-right: 8px;
+}
+
+settings .wrappers {
+    background: bisque;
+    padding: 1.5em;
+    border-radius: 25px;
+    margin: 20px 10px;
+    min-height: 185px;
+    box-shadow: 0px 0px 5px 3px inset;
+    transition: all 0.2s ease-out;
+}
+
+settings .wrappers p {
+    margin: 0;
+}
+
+settings .wrappers input[type=radio]:checked~label, settings .wrappers input[type=checkbox]:checked~label {
+    font-weight: 700;
+}
+
+settings .wrappers input:hover~.settingDetails, settings .wrappers input:focus~.settingDetails, settings .wrappers label:hover~.settingDetails {
+    opacity: 1;
+}
+
+settings .wrappers input:focus~.settingDetails {
+    color: green
+}
+
+settings .settingDetails {
+    font-style: italic;
+    font-size: 0.8em;
+    float: right;
+    opacity: 0;
+}
+
+settings .settingNotes{
+    font-style: italic;
+    font-size: 0.8em;
+    float: right;
+    display: none;
+} 

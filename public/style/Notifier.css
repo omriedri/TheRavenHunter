@@ -1,0 +1,64 @@
+/* ---- Elements ----*/
+.notifier{
+    width: 100%;
+    min-width: 350px;
+    max-width: 450px;
+    min-height: 30px; 
+    padding: 0.75em 1em; 
+    text-align: start; 
+    position: fixed; 
+    border-radius: 5px;
+    z-index: 1000000;
+    transition: 200ms opacity linear;
+    box-shadow: 1px 1px 5px 1px grey ;
+}
+.notifier .title{font-size: 24px; display: block; margin-bottom: 0.25em;}
+.notifier .message{font-size: 16px;}
+.notifier span.x{position: absolute; padding: 0.5em; top: 0; left: 0; font-size: 1.25em; font-weight:400 ; cursor: pointer; transition: 0.2s all ease-out;}
+.notifier span.x:hover{font-weight: 800;}
+[dir=rtl] .notifier span.x{left: 0; right: unset;}
+
+
+/* ---- Direction ----*/
+.px-start{left: 2em; right: unset;}
+.px-end{right: 2em; left: unset;}
+.py-start{top: 2em; bottom: unset;}
+.py-end{bottom: 2em; top: unset;}
+[dir=rtl] .px-start{right: 2em;}
+[dir=rtl] .px-end{left: 2em;}
+
+
+/* ---- Themes ----*/
+.s-default{background-color: whitesmoke; color: grey;}
+.s-primary{background-color: #cfe2ff; color: #084298; border: 1px solid #b6d4fe;}
+.s-secondary{background-color: #e2e3e5; color: #41464b; border: 1px solid #d3d6d8;}
+.s-success{background-color: #d1e7dd; color: #0f5132; border: 1px solid #badbcc}
+.s-danger{background-color: #f8d7da; color: #842029; border: 1px solid #f5c2c7}
+.s-warning{background-color: #fff3cd; color: #664d03; border: 1px solid #ffecb5}
+.s-info{background-color: #cff4fc; color: #055160; border: 1px solid #b6effb}
+.s-light{background-color: #fefefe; color: #636464; border: 1px solid #fdfdfe}
+.s-dark{background-color: #161616; color: #c4c4c4; border: 1px solid #494949}
+
+
+/* ---- Animations ----*/
+.notifier.fadeout{opacity: 0;}
+.notifier.py-end{animation:notifierYstart 500ms} @keyframes notifierYend{from{right:-300px;opacity:0} to{right: 2em;opacity:1}}
+.notifier.py-start{animation:notifierYend 500ms} @keyframes notifierYstart{from{left:-300px;opacity:0} to{left: 2em;opacity:1}}
+.notifier.px-start{animation:notifierXendRTL 500ms} @keyframes notifierXstartRTL{from{right:-300px;opacity:0} to{right: 2em;opacity:1}}
+.notifier.px-end{animation:notifierXstartRTL 500ms} @keyframes notifierXendRTL{from{left:-300px;opacity:0} to{left: 2em;opacity:1}}
+[dir=rtl] .notifier.px-start{animation:notifierXstart 500ms} @keyframes notifierXstart{from{right:-300px;opacity:0} to{right: 2em;opacity:1}}
+[dir=rtl] .notifier.px-end{animation:notifierXend 500ms} @keyframes notifierXend{from{left:-300px;opacity:0} to{left: 2em;opacity:1}}
+
+
+@media only screen and (max-width: 576px) {
+    .notifier {
+        min-width: 280px;
+        max-width: 360px;
+    }
+    .notifier .title {
+        font-size: 20px;
+    }
+    .notifier span.x {
+        display: none;
+    }
+}

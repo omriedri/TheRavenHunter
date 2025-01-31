@@ -138,4 +138,29 @@
         }
         return $dates;
     }
+
+    /**
+     * Get friendly time from seconds
+     *
+     * @param [type] $seconds
+     * @return void
+     */
+    public static function secondsToTime($seconds) {
+        $dtF = new DateTime("@0");
+        $dtT = new DateTime("@$seconds");
+        return $dtF->diff($dtT)->format('%H:%I:%S');
+    }
+
+    /**
+     * Get friendly time from miliseconds
+     *
+     * @param int $miliseconds
+     * @return string
+     */
+    public static function milisecondsToTime(int $miliseconds) {
+        $seconds = $miliseconds / 1000;
+        $dtF = new DateTime("@0");
+        $dtT = new DateTime("@$seconds");
+        return $dtF->diff($dtT)->format('%H:%I:%S');
+    }
 }

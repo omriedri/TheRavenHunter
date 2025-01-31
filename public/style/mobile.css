@@ -1,0 +1,234 @@
+/* mobile-view utilities */
+
+.mobile-view .w-mv-25 {
+    width: 25%;
+}
+
+.mobile-view .w-mv-33 {
+    width: 33%;
+}
+
+.mobile-view .w-mv-49 {
+    width: 49%;
+}
+
+.mobile-view .w-mv-50 {
+    width: 50%;
+}
+
+.mobile-view .d-mv-none {
+    display: none;
+}
+
+.mobile-view .d-mv-block {
+    display: block;
+}
+
+.mobile-view .d-mv-inline-block {
+    display: inline-block;
+}
+
+.mobile-view .m-mv-0 {
+    margin: 0;
+}
+
+.mobile-view .p-mv-0 {
+    padding: 0;
+}
+
+.mobile-view .mv-text-left {
+    text-align: left !important;
+}
+
+.mobile-view .mv-text-center {
+    text-align: center !important;
+}
+
+.mobile-view .mv-text-right {
+    text-align: right !important;
+}
+
+.mobile-view .mv-text-justify {
+    text-align: justify !important;
+}
+
+/* header */
+
+.mobile-view h1 {
+    position: relative;
+    transform: scale(0.75);
+    top: 5px;
+}
+
+.mobile-view .nav-container.hide {
+    left: -300px;
+}
+
+.mobile-view .nav-container.show {
+    left: 0px;
+}
+
+.mobile-view profile {
+    left: auto;
+    width: auto;
+    right: 10px;
+}
+
+.mobile-view .user-nickname {
+    display: none;
+}
+
+.mobile-view .dropdown-menu.show {
+    transform: translate3d(-120px, 37px, 0px);
+}
+
+/* home */
+
+.mobile-view home button#start {
+    display: block;
+    width: auto;
+    height: auto;
+    font-size: 32px;
+    margin-top: 1em;
+    padding: 5px 20px;
+    filter: drop-shadow(2px 4px 6px black);
+}
+
+.mobile-view home #bird {
+    max-height: 250px;
+}
+
+/* game */
+
+.mobile-view game img#bird {
+    width: 75px;
+    height: 75px;
+}
+
+.mobile-view game #timer {
+    top: unset;
+    bottom: 15px;
+    left: 15%;
+    width: 70%;
+    right: unset;
+    margin: 0 auto;
+}
+
+.mobile-view game #timer>* {
+    margin: 5px auto;
+}
+
+.mobile-view game #timer restart {
+    position: fixed;
+    bottom: 14px;
+    left: 5px;
+    padding: 0;
+}
+
+.mobile-view game #timer restart button{
+    border-radius: 10px;
+}
+
+.mobile-view game #timer timer {
+    position: fixed;
+    background: none;
+    border: none;
+    bottom: 12px;
+    right: 0;
+}
+
+.mobile-view game #birdTouchCounter {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-radius: 0;
+}
+
+.mobile-view game #birdTouchCounter .progress-bar {
+    transition: all 0.4s linear;
+}
+
+/* settings */
+
+.mobile-view settings .wrappers {
+    margin: 20px 0px;
+}
+
+.mobile-view setting .settingDetails {
+    position: absolute;
+    right: 30px;
+}
+
+/* records */
+
+.mobile-view records select {
+    margin: 20px auto;
+}
+
+.mobile-view records table th {
+    padding: 1% !important;
+    vertical-align: middle;
+}
+
+.mobile-view records table td, .mobile-view records table th {
+    width: auto !important;
+    padding: 0;
+    vertical-align: middle;
+}
+
+.mobile-view records table .date, .mobile-view records table .hour, .mobile-view records table .platform {
+    display: none;
+}
+
+.mobile-view records[filter=score] table .plat {
+    display: none;
+}
+
+.mobile-view records[filter=time] table .score {
+    display: none;
+}
+
+.mobile-view records[filter=score] table .time {
+    display: none;
+}
+
+/* about */
+
+.mobile-view about .container.content>.row {
+    flex-direction: column-reverse;
+}
+
+.mobile-view about .contentCol {
+    text-align: center;
+}
+
+/* footer */
+
+.mobile-view footer {
+    display: none;
+}
+
+.mobile-view home.active~footer {
+    display: block;
+}
+
+/* modals */
+
+.mobile-view modal {
+    left: 5%;
+    width: 90%;
+    right: 5%;
+    max-height: 240px;
+    max-width: 320px;
+}
+
+.mobile-view #profilePreview .row.img img {
+    float: none !important;
+    display: block;
+    margin: 0 auto;
+}
+
+.mobile-view #profilePreview.isOther .row.email {
+    display: none;
+}

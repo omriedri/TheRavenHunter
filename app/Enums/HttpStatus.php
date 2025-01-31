@@ -1,5 +1,9 @@
 <?php class HttpStatus {
 
+    public $code = self::OK;
+    public $message = "OK";
+    public $description = "The request has succeeded.";
+
     const OK = 200;
     const CREATED = 201;
     const ACCEPTED = 202;
@@ -14,6 +18,12 @@
     const INTERNAL_SERVER_ERROR = 500;
     const NOT_IMPLEMENTED = 501;
     const BAD_GATEWAY = 502;
+
+    public function __construct(int $code = 200) {
+        $this->code = $code;
+        $this->message = self::getMessage($code);
+        $this->description = self::getErrorDescription($code);
+    }
 
     public static function getMessage($code = 200) {
         switch ($code) {

@@ -1,0 +1,11 @@
+about {
+    padding: 25px;
+    animation-name: fadeInOpacity;
+    animation-duration: .15s;
+    animation-timing-function: steps(cubic-bezier(0.19, 1, 0.22, 1));
+}
+
+about .content { margin-top: 100px }
+about .content a { color: darkred }
+about .content a:hover { color: blue }
+about .birdCol img { max-width: 600px }

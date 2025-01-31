@@ -1,7 +1,10 @@
 <?php class SimpleResponse {
 
-    public bool $status = true;
-    public string $message = '';
+    protected const DEFAULT_STATUS = true;
+    protected const DEFAULT_MESSAGE = '';
+
+    public $status  = self::DEFAULT_STATUS;
+    public $message = self::DEFAULT_MESSAGE;
 
     public function __construct() {
         header('Content-Type: application/json');

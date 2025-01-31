@@ -4,6 +4,7 @@ require_once __DIR__ . '/BaseController.php';
 require_once __DIR__ . '/../Models/User.php';
 require_once __DIR__ . '/../Services/AuthService.php';
 require_once __DIR__ . '/../Responses/BaseResponse.php';
+require_once __DIR__ . '/../Responses/DataResponse.php';
 
 class AuthController extends BaseController {
 
@@ -12,13 +13,16 @@ class AuthController extends BaseController {
      * @return void
      */
     public static function login(): void {
-        $Response = new BaseResponse();
+        $Response = new DataResponse();
         try {
             $data = self::getReadyData(User::AUTH_RULES);
             $AuthResponse = AuthService::login($data['email'], $data['password']);
-            $AuthResponse->status ? 
-                $Response->setSuccess($AuthResponse->message) :
+            if($AuthResponse->status) {
+                $Response->setSuccess($AuthResponse->message);
+                $Response->setData($AuthResponse->data);
+            } else {
                 $Response->setError($AuthResponse->message, HttpStatus::UNAUTHORIZED);
+            }
         } catch (\Throwable $e) {
             $Response->handleException($e);
         }
@@ -51,8 +55,12 @@ class AuthController extends BaseController {
         $Response = new DataResponse();
         try {
             $isLogged = AuthService::check();
-            $Response->setMessage($isLogged ? 'מחובר' : 'לא מחובר');
-            $Response->setData(['isLogged' => $isLogged]);
+            $Response->setMessage($isLogged ? 'Logged in' : 'Not logged in');
+            $data = ['isLogged' => $isLogged];
+            if($isLogged) {
+                $data['User'] = AuthService::user()->getUserInfo();
+            }
+            $Response->setData($data);
         } catch (\Throwable $e) {
             $Response->handleException($e);
         }

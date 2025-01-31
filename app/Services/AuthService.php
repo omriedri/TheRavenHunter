@@ -5,6 +5,7 @@ require_once __DIR__ . '/../Exceptions/AuthException.php';
 require_once __DIR__ . '/../Enums/HttpStatus.php';
 require_once __DIR__ . '/../Responses/BaseResponse.php';
 require_once __DIR__ . '/../Responses/SimpleResponse.php';
+require_once __DIR__ . '/../Responses/SimpleResponseData.php';
 
 class AuthService {
 
@@ -12,19 +13,23 @@ class AuthService {
      * Login user (create session)
      * @param string $email
      * @param string $password
-     * @return SimpleResponse
+     * @return SimpleResponseData
      */
-    public static function login(string $email, string $password): SimpleResponse {
-        $Response = new SimpleResponse();
-        $User = User::select(['email', '=', $email, 'password', '=', self::generatePassword($password)]);
+    public static function login(string $email, string $password): SimpleResponseData {
+        $Response = new SimpleResponseData();
+        $User = User::select([
+            'email' => $email, 
+            'password' => self::generatePassword($password)
+        ])[0] ?? null;
         if ($User instanceof User) {
             $User->csrf = self::generateCsrf();
             $User->last_login = date('Y-m-d H:i:s');
             $User->save();
             self::setUserSession($User);
-            $Response->setSuccess(HttpStatus::OK, 'התחברת בהצלחה');
+            $Response->setSuccess('You have logged in successfully');
+            $Response->data = $User->getUserInfo();
         } else {
-            $Response->setError(HttpStatus::UNAUTHORIZED, 'פרטי ההתחברות שגויים');
+            $Response->setError('Invalid email or password', HttpStatus::UNAUTHORIZED);
         }
         return $Response;
     }
@@ -37,12 +42,12 @@ class AuthService {
         $Response = new SimpleResponse();
         if(session_status() !== PHP_SESSION_ACTIVE) session_start();
         if(!isset($_SESSION['User'])) {
-            $Response->setError(HttpStatus::UNAUTHORIZED, 'אינך מחובר');
+            $Response->setError('You are not logged in');
             return $Response;
         }
         unset($_SESSION['User']);
         session_destroy();
-        $Response->setSuccess(HttpStatus::OK, 'התנתקת בהצלחה');
+        $Response->setSuccess('You have logged out successfully');
         return $Response;
     }
 
@@ -51,7 +56,6 @@ class AuthService {
      * @return User|null
      */
     public static function user(): ?User {
-        if(session_status() !== PHP_SESSION_ACTIVE) session_start();
         return isset($_SESSION['User']) ? unserialize($_SESSION['User']) : null;
     }
 
@@ -60,7 +64,6 @@ class AuthService {
      * @return boolean
      */
     public static function check(): bool {
-        if(session_status() !== PHP_SESSION_ACTIVE) session_start();
         return !empty($_SESSION['User']);
     }
 
@@ -85,7 +88,7 @@ class AuthService {
      * @param string $password
      * @return string
      */
-    private static function generatePassword(string $password): string {
+    public static function generatePassword(string $password): string {
         return hash('sha256', $_ENV['PASSWORD_SALT'] . "#$password#");
     }
 

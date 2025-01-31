@@ -1,0 +1,702 @@
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+    to {
+        bottom: 1;
+    }
+}
+
+body.default {
+    background: burlywood;
+    background-size: cover;
+}
+
+body input[type=checkbox] {
+    transform: scale(1.5);
+}
+
+header.sticky {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10000;
+    background: black;
+    color: whitesmoke !important;
+    padding-bottom: 10px;
+    border-bottom: 2px solid white;
+    transition: all 0.1s linear;
+}
+
+header.sticky h1 {
+    text-shadow: none !important;
+}
+
+header.sticky profile .user-avatar-wrap{
+    border-color: white;
+}
+
+header.sticky~.page {
+    margin-top: 60px;
+}
+
+header.sticky nav .trigger-button {
+    filter: invert(1);
+}
+
+header.sticky nav .nav-container{
+    top: 72px;
+}
+
+header .title {
+    transition: all 0.3s linear;
+    text-shadow: 0 1px 0 #ccc, 0 2px 0 #c9c9c9, 0 3px 0 #bbb, 0 4px 0 #b9b9b9, 0 5px 0 #aaa, 0 6px 1px rgba(0, 0, 0, .1), 0 0 5px rgba(0, 0, 0, .1), 0 1px 3px rgba(0, 0, 0, .3), 0 3px 5px rgba(0, 0, 0, .2), 0 5px 10px rgba(0, 0, 0, .25), 0 10px 10px rgba(0, 0, 0, .2), 0 20px 20px rgba(0, 0, 0, .15);
+}
+
+.text {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin-top: 0px;
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+/* ----- NAVIGATION ----- */
+
+nav {
+    top: 15px;
+    left: 2%;
+    padding: 0;
+    position: absolute;
+}
+
+nav .trigger-button {
+    fill: currentColor;
+    border: unset;
+    background: unset;
+}
+
+
+nav .trigger-button .bi-list {
+    width: 3em;
+    height: 3em;
+}
+
+nav .trigger-button:hover~.nav-container, nav .trigger-button:focus~.nav-container {
+    left: 0px;
+}
+
+nav .trigger-button:hover :root .page{
+    filter: blur(8);
+}
+
+nav .nav-container {
+    z-index: 9999;
+    left: -300px;
+    background: rgba(0, 0, 0, .9);
+    transition: all 0.15s ease-out;
+}
+
+nav .nav-container:hover {
+    left: 0px;
+}
+
+nav .nav-container:hover :root body{
+    filter: blur(5px);
+}
+
+nav .nav-container.show {
+    left: 0px;
+}
+
+
+nav .menu-item-list {
+    list-style-type: none;
+}
+
+nav .menu-item[data-user-logged] {
+    display: none;
+}
+
+body.logged-in nav .menu-item[data-user-logged] {
+    display: block;
+}
+
+nav .menu-item {
+    transition: all 0.15s ease-out;
+}
+
+nav .menu-item:hover {
+    background: rgb(42, 42, 42);
+}
+
+nav .menu-item button:focus~.nav-container {
+    left: 0px;
+}
+
+nav .menu-item button .bi {
+    display: inline-block;
+    margin-right: 5px;
+}
+
+profile {
+    position: absolute;
+    top: 20px;
+    left: 6%;
+    height: 40px;
+    width: 235px;
+    opacity: 0;
+    transition: opacity 0.25s linear;
+}
+
+body.logged-in profile {
+    opacity: 1;
+}
+
+
+profile .user-avatar-wrap {
+    cursor: pointer;
+    filter: none;
+    transition: all 0.25;
+}
+
+profile button.user-avatar-wrap:hover, profile button.user-avatar-wrap:focus {
+    filter: drop-shadow(2px 4px 6px black);
+}
+
+profile .user-profile-image, profile .logout-icon {
+    transition: all 0.25s, transform 0.5s ease-out;
+    cursor: pointer;
+}
+
+profile .user-nickname {
+    vertical-align: middle;
+    font-size: 1.5em;
+}
+
+.page {
+    display: none
+}
+
+.page.active {
+    display: block !important
+}
+
+.page > .heading {
+    text-align: center;
+}
+
+/* ----- HOME ----- */
+
+home {
+    display: none;
+}
+
+home.active {
+    display: block;
+}
+
+home #bird {
+    margin: 10px auto;
+    margin-top: 0px;
+    height: 300px;
+    display: block;
+    z-index: 100;
+}
+
+home #fbLink img.hide {
+    opacity: 0;
+    /* transform: scale(0); */
+}
+
+home #fbLink img {
+    opacity: 1;
+    transform: scale(1);
+    border: 1px solid #000;
+    border-radius: 15px;
+    box-shadow: 1px 1px 1px #000;
+    transition: box-shadow 0.15s ease-in, transform 0.5s ease, opacity 0.25s ease-in;
+}
+
+home #fbLink img:hover, home #fbLink:focus img {
+    box-shadow: 1px 1px 10px 1px #000;
+    /* transform: scale(1.05); */
+}
+
+home #fb-login-container .profile-img {
+    border: 1px solid #000;
+    border-radius: 100%;
+    height: 100px;
+    max-width: 150px;
+}
+
+home .login-register-section {
+    transition: opacity 0.3s linear;
+    animation-delay: 5s;
+    animation: fade-in 0.75s ease-in;
+}
+
+home .login-register-section .button_cont {
+    display: inline-block;
+}
+
+home .cta-btn {
+    border: none;
+    background: #404040;
+    color: #ffffff !important;
+    font-weight: 100;
+    padding: 20px;
+    text-transform: uppercase;
+    border-radius: 6px;
+    display: inline-block;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+}
+
+home .cta-btn:hover, home .cta-btn:focus {
+    color: #404040 !important;
+    font-weight: 700 !important;
+    letter-spacing: 3px;
+    background: #ccc;
+    border: 1px solid;
+    box-shadow: 0px 5px 40px -10px rgba(0, 0, 0, 0.57);
+    -moz-box-shadow: 0px 5px 40px -10px rgba(0, 0, 0, 0.57);
+    transition: all 0.3s ease 0s;
+}
+
+home #start {
+    display: block;
+    margin: 10px auto;
+    padding: 10px 3px;
+    height: 100px;
+    width: 350px;
+    border: 5px solid black;
+    border-radius: 30px;
+    background: bisque;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 48px;
+    text-align: center;
+    font-weight: bold;
+    color: black;
+    opacity: 0;
+    transform: scale(0);
+    transition: all 0.25s linear;
+    box-sizing: content-box;
+}
+
+home #start.show {
+    opacity: 1;
+    transform: scale(1);
+}
+
+home #start:hover, home #start:focus {
+    margin: 10px auto;
+    height: 100px;
+    width: 350px;
+    border: 5px solid black;
+    border-radius: 30px;
+    background: bisque;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 48px;
+    text-align: center;
+    font-weight: bold;
+    color: black;
+    transform: scale(1.2);
+}
+
+home h3.unsupportBottom {
+    display: none;
+}
+
+/* --- GAME --- */
+
+game {
+    display: none;
+}
+
+game.active {
+    display: block;
+}
+
+game #cage {
+    min-width: 200px;
+    min-height: 120px;
+    /* cursor: grab; */
+    margin: 0px auto;
+    transition: all 0.2s linear;
+    animation-name: fadeInOpacity;
+    animation-duration: .15s;
+    animation-timing-function: steps(cubic-bezier(0.19, 1, 0.22, 1));
+    cursor: url('/public/images/aim.png'), auto;
+}
+
+@keyframes fadeInOpacity {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+game #bird {
+    height: 150px;
+    width: 150px;
+    float: right;
+    margin-right: 0px;
+    margin-left: 0px;
+    margin-top: 0px;
+    opacity: 1;
+    transition: all 0.5s;
+    cursor: url('/public/images/aim-red.png'), auto;
+}
+
+game #bird.disappear {
+    opacity: 0;
+}
+
+game #bird:hover {
+    transform: scale(1.25);
+}
+
+game #timer {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+}
+
+game #timer>* {
+    padding: 5px 10px;
+    margin: 5px;
+    border: 1px solid black;
+    color: black;
+    background: bisque;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 24;
+    box-sizing: content-box;
+    transition: all 0.15s ease-out;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+game restart {
+    display: none;
+}
+
+game restart.active {
+    display: inline-block;
+}
+
+game restart button {
+    font-weight: 600;
+    border: none;
+    background: none;
+    min-width: 85px;
+}
+
+game restart button:hover {
+    color: bisque;
+    background-color: brown;
+}
+
+/* ----- MODAL & OVERLAY ----- */
+
+overlay {
+    background: rgba(0, 0, 0, 0.4);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    display: none;
+}
+
+modal {
+    position: fixed;
+    z-index: 10;
+    padding: 20px;
+    max-width: 600px;
+    left: 35%;
+    width: 30%;
+    top: 35%;
+    text-align: center;
+    border-radius: 20px;
+    z-index: 2;
+    background: floralwhite;
+    box-shadow: 1px 1px 10px 1px black;
+    transition: all 0.25s ease;
+    animation-name: Modal;
+    animation-duration: .3s;
+    animation-timing-function: steps(cubic-bezier(0.19, 1, 0.22, 1));
+}
+
+@keyframes Modal {
+    0% {
+        transform: scale(0);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+modal button.closeBtn {
+    display: none;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    transition: all 0.2s linear;
+}
+
+modal button.closeBtn:hover {
+    color: red;
+}
+
+modal button.closeBtn:focus-within {
+    color: red;
+}
+
+modal button.closeBtn.active {
+    display: inline-block;
+}
+
+modal button:not(.closeBtn) {
+    margin: 5px auto;
+    min-width: 150px;
+}
+
+modal button.inactive {
+    display: none;
+}
+
+modal #scoreTime {
+    display: none;
+}
+
+modal alert {
+    display: none;
+    max-width: 250px;
+    margin: 10px auto;
+}
+
+modal alert.active {
+    display: block;
+}
+
+modal alert input[type=submit] {
+    position: absolute;
+    bottom: 13px;
+    right: 21px;
+    height: 36px;
+}
+
+blocker {
+    display: none;
+    text-align: center;
+}
+
+blocker.active {
+    display: block
+}
+
+/* ----- Login/Register modal */
+
+.modal .opacity-0 {
+    opacity: 0 !important;
+}
+
+.modal label {
+    margin-bottom: 0;
+    margin-top: 0.5rem;
+}
+
+.modal form {
+    display: none;
+}
+
+.modal form.active {
+    display: block;
+}
+
+#registerForm .image .error {
+    opacity: 1;
+    transition: all 0.1s linear;
+}
+
+.modal .image-button:hover, .modal .image-button:focus {
+    box-shadow: 0 0 5px 1px;
+}
+
+.modal.hiddn-footer .modal-footer {
+    display: none !important;
+}
+
+.modal .fb-register-btn {
+    position: absolute;
+    left: 0;
+    transition: 0.2s all linear;
+    border: 0;
+    background: transparent;
+}
+
+.modal .fb-register-btn img {
+    height: 35px;
+    max-width: 55vw;
+}
+
+.modal .fb-btn:hover, .modal .fb-btn:focus {
+    filter: contrast(1.25);
+}
+
+.modal #profilePreview .img {
+    background: none;
+}
+
+.modal #profilePreview .img img {
+    min-height: 200px;
+    max-height: 200px;
+}
+
+
+
+/* ---- Profile-Preview modal ----- */
+
+.modal .user-info-col .alert {
+    padding: 0 !important;
+}
+
+.modal #profilePreview.isYou #RegistrationModalLongTitleOther {
+    display: none;
+}
+
+.modal #profilePreview.isOther #RegistrationModalLongTitleYou {
+    display: none;
+}
+
+.modal #profilePreview.isOther .modal-footer .btn-primary {
+    display: none;
+}
+
+.modal [expanded=false] {
+    display: none;
+}
+
+/* ----- FOOTER ----- */
+
+footer {
+    padding: 0px 10px;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
+}
+
+footer span.copyright {
+    float: right;
+}
+
+footer a {
+    color: black
+}
+
+footer a:hover, footer a:focus {
+    color: blue
+}
+
+footer #birdPlacment {
+    position: fixed;
+    display: none;
+    width: 10%;
+    left: 45%;
+    bottom: 5px;
+    padding: 5px 15px;
+    background: black;
+    color: white;
+    border-radius: 20px;
+    box-shadow: 0 0 10px black;
+    text-align: center;
+}
+
+footer #birdPlacment .axis {
+    width: 47%;
+    display: inline-block
+}
+
+footer #birdPlacment strong {
+    color: yellow;
+}
+
+footer #birdPlacment i {
+    margin: 0px 10px;
+}
+
+footer #birdPlacment.active {
+    display: block;
+}
+
+/* ----- APPEARENCE ----- */
+
+body [theme="1"] { background-image: url('/public/images/backgrounds/sunrise.jpg'); }
+body [theme="2"] { background-image: url('/public/images/backgrounds/opensky.jpg'); }
+body [theme="3"] { background-image: url('/public/images/backgrounds/beach.jpg'); }
+body [theme="4"] { background-image: url('/public/images/backgrounds/mountainsvalley.jpg'); }
+
+appearance {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+}
+
+appearance img {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.noSelect {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.noSelect:focus {
+    outline: none !important;
+}
+
+@media only screen and (max-width: 760px) {
+    home button#start {
+        display: none;
+    }
+    home h2.unsupport {
+        display: block;
+        font-size: 24px;
+        text-align: center;
+        color: white;
+        text-shadow: 0 0 2px black, 0 0 4px black;
+    }
+    home h3.unsupportBottom {
+        display: block;
+        font-size: 16px;
+        text-align: center;
+        color: wheat;
+        text-shadow: 0 0 2px black, 0 0 4px black;
+    }
+
+    modals #profilePreview .img {
+        height: 250px;
+        background-size: cover;
+        background-position: center;
+    }
+
+    
+    modals #profilePreview .img .col {
+        display: none   ;
+    }
+}

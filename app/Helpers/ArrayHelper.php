@@ -49,4 +49,13 @@
         foreach($array as $value) if(!is_string($value)) $nonStrings++;
         return $nonStrings === 0;
     }
+
+    /**
+     * Filter out unmatched keys from the given array
+     * @param array $array
+     * @return array
+     */
+    public static function filter($data = [], $keys = []): array {
+        return array_filter($data, fn($key) => in_array($key, $keys), ARRAY_FILTER_USE_KEY); 
+    }
 }

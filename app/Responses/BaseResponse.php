@@ -24,9 +24,9 @@ class BaseResponse {
      * Set custom message
      *
      * @param string $message
-     * @return BaseResponse
+     * @return static
      */
-    public function setMessage(string $message):BaseResponse {
+    public function setMessage(string $message): static {
         $this->message = $message;
         return $this;
     }
@@ -35,9 +35,9 @@ class BaseResponse {
      * Set success status and message
      *
      * @param string|null $message
-     * @return BaseResponse
+     * @return static
      */
-    public function setSuccess(?string $message = null): BaseResponse {
+    public function setSuccess(?string $message = null): static {
         $this->success = true;
         $this->message = $message ?? $this->message;
         return $this;
