@@ -13,8 +13,8 @@ export class Game {
         BIRD    : document.querySelector('game img#bird'),
         CAGE    : document.querySelector('game #cage'),
         RESTART : Timer.ELEMENTS.restart,
-        EXIT_BTN: document.querySelector('game exit button'),
-        GAME_OVER_MODAL: document.querySelector(GameEndingModal.selector),
+        EXIT_BTN: document.querySelector('game [action="exit"]'),
+        LIFE_BAR: document.querySelector('game #life-bar .progress-bar'),
     }
 
     SOUNDS = {
@@ -101,16 +101,6 @@ export class Game {
         } else {
             this.coordinates.x = this.#getRandomXCoordinate();
             this.coordinates.y = this.#getRandomYCoordinate();
-
-            if(MainInstance.getSettings().difficulty === this.#DIFICULTY.INSANE) {
-                while (Math.abs(this.coordinates.x - Game.ELEMENTS.CAGE.offsetWidth) < 250) {
-                    this.coordinates.x = this.#getRandomXCoordinate();
-                  }
-                  while (Math.abs(this.coordinates.y - Game.ELEMENTS.CAGE.offsetHeight) < 250) {
-                    this.coordinates.y = this.#getRandomYCoordinate();
-                  }
-            
-            }
         }
         this.static.ELEMENTS.BIRD.style.top = `${this.coordinates.y}px`;
         this.static.ELEMENTS.BIRD.style.right = `${this.coordinates.x}px`;
@@ -137,7 +127,7 @@ export class Game {
         if(!this.isRunning()) return;
         if(event instanceof MouseEvent && !this.#isMouseOverTheBird(event)) return;
         this.hitCounts++;
-        console.log('Bird hit', this.hitCounts);
+        this.#setBirdLifePrecentage();
         if(this.hitCounts >= this.#getRequiredHitsByDifficulty()) {
             this.SOUNDS.KILL.play();
             this.end();
@@ -174,6 +164,7 @@ export class Game {
         this.scoreTime = 0;
         this.#updateScore();
         this.#setBirdPosition(0, 0);
+        this.#setBirdLifePrecentage();
         this.#clearMovementsInterval();
         this.#clearVisibilityInterval();
         
@@ -194,7 +185,7 @@ export class Game {
         this.Timer.start();
         this.intervals.movements = setInterval(() => this.#moveBird(), this.#getItervalTimeByDifficulty());
         if(MainInstance.getSettings().difficulty === this.#DIFICULTY.INSANE) {
-            this.intervals.visibility = setInterval(() => this.#switchVisibility(), 1500);
+            this.intervals.visibility = setInterval(() => this.#switchVisibility(), 1000);
         }
     }
 
@@ -301,6 +292,23 @@ export class Game {
         }
         if(this.static.ELEMENTS.BIRD.classList.contains('disappear')) {
             this.static.ELEMENTS.BIRD.classList.remove('disappear');
+        }
+    }
+
+    #setBirdLifePrecentage() {
+        const hitsLeft = this.#getRequiredHitsByDifficulty() - this.hitCounts;
+        const hitsRequired = this.#getRequiredHitsByDifficulty();
+        const hitsPercentage = (hitsLeft / hitsRequired) * 100;
+        this.static.ELEMENTS.LIFE_BAR.style.width = `${hitsPercentage}%`;
+        if(hitsPercentage <= 25) {
+            this.static.ELEMENTS.LIFE_BAR.classList.remove('bg-success', 'bg-warning');
+            this.static.ELEMENTS.LIFE_BAR.classList.add('bg-danger');
+        } else if(hitsPercentage <= 50) {
+            this.static.ELEMENTS.LIFE_BAR.classList.remove('bg-success', 'bg-danger');
+            this.static.ELEMENTS.LIFE_BAR.classList.add('bg-warning');
+        } else {
+            this.static.ELEMENTS.LIFE_BAR.classList.remove('bg-warning', 'bg-danger');
+            this.static.ELEMENTS.LIFE_BAR.classList.add('bg-success');
         }
     }
 

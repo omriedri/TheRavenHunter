@@ -205,16 +205,16 @@ class Score extends \Aternos\Model\GenericModel {
         $score = 0;
         switch ($this->difficulty) {
             case self::DIFFICULTY_EASY:
-                $score = 10000;
+                $score = 20000;
                 break;
             case self::DIFFICULTY_MEDIUM:
-                $score = 25000;
+                $score = 50000;
                 break;
             case self::DIFFICULTY_HARD:
-                $score = 75000;
+                $score = 70000;
                 break;
             case self::DIFFICULTY_INSANE:
-                $score = 100000;
+                $score = 10000;
                 break;
         }
         $score = (int) ($score - ($miliSeconds * 0.75));

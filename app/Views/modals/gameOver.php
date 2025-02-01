@@ -5,9 +5,10 @@
                 <h1 class="modal-title fs-5" id="GameOverModalLabel">Game Over</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body text-center">
-                <h2>Game Over</h2>
-                <p>The time is over.</p>
+            <div class="modal-body text-center pt-4">
+                <h2 class="mb-4">Game Over</h2>
+                <p class="mb-1">You have lost the game!</p>
+                <p class="mt-0">The time is over, try better next time!</p>
             </div>
             <div class="modal-footer border-0 d-flex justify-content-center">
                 <button type="button" class="btn btn-secondary" data-action="exit"    data-bs-dismiss="modal" style="width: 100px;">Exit</button>

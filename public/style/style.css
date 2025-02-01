@@ -7,6 +7,10 @@
     }
 }
 
+body {
+    padding-top: 80px;
+}
+
 body.default {
     background: burlywood;
     background-size: cover;
@@ -31,6 +35,22 @@ header.sticky {
 
 header.sticky h1 {
     text-shadow: none !important;
+}
+
+ header .cover {
+    height: 300px;
+}
+
+header .cover img {
+    position: relative;
+    top: -45px;
+    height: 100%;
+    transition: all 0.25s linear;
+}
+
+header .cover.minimized img {
+    transform: scale(0.5);
+    translate: 0px -50px;
 }
 
 header.sticky profile .user-avatar-wrap{
@@ -68,6 +88,7 @@ nav {
     left: 2%;
     padding: 0;
     position: absolute;
+    z-index: 10;
 }
 
 nav .trigger-button {
@@ -146,6 +167,7 @@ profile {
     height: 40px;
     width: 235px;
     opacity: 0;
+    z-index: 9;
     transition: opacity 0.25s linear;
 }
 
@@ -190,44 +212,11 @@ profile .user-nickname {
 
 home {
     display: none;
+    margin-top: -50px;
 }
 
 home.active {
     display: block;
-}
-
-home #bird {
-    margin: 10px auto;
-    margin-top: 0px;
-    height: 300px;
-    display: block;
-    z-index: 100;
-}
-
-home #fbLink img.hide {
-    opacity: 0;
-    /* transform: scale(0); */
-}
-
-home #fbLink img {
-    opacity: 1;
-    transform: scale(1);
-    border: 1px solid #000;
-    border-radius: 15px;
-    box-shadow: 1px 1px 1px #000;
-    transition: box-shadow 0.15s ease-in, transform 0.5s ease, opacity 0.25s ease-in;
-}
-
-home #fbLink img:hover, home #fbLink:focus img {
-    box-shadow: 1px 1px 10px 1px #000;
-    /* transform: scale(1.05); */
-}
-
-home #fb-login-container .profile-img {
-    border: 1px solid #000;
-    border-radius: 100%;
-    height: 100px;
-    max-width: 150px;
 }
 
 home .login-register-section {
@@ -359,6 +348,15 @@ game #bird:hover {
     transform: scale(1.25);
 }
 
+game #game-control-btns {
+    top: 20px;
+    right: 20px;
+}
+
+game #game-control-btns .btn {
+    min-width: 100px;
+}
+
 game #timer {
     position: absolute;
     top: 20px;
@@ -381,11 +379,13 @@ game #timer>* {
 }
 
 game restart {
+    width: 80px;
     display: none;
+    transition: all 0.15s ease-out;
 }
 
-game restart.active {
-    display: inline-block;
+game restart.show {
+    display: block;
 }
 
 game restart button {
@@ -395,110 +395,46 @@ game restart button {
     min-width: 85px;
 }
 
-game restart button:hover {
-    color: bisque;
-    background-color: brown;
+game restart:hover {
+    color: black;
+    background-color: white !important;
 }
 
-/* ----- MODAL & OVERLAY ----- */
+game exit {
+    width: 80px;
+    transition: all 0.15s ease-out;
+}
 
-overlay {
-    background: rgba(0, 0, 0, 0.4);
+game exit:hover {
+    color: black;
+    background-color: white !important
+}
+
+game #life {
     position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 1;
-    display: none;
+    left: unset;
+    bottom: unset;
+    top: 4px;
+    right: 310px;
 }
 
-modal {
-    position: fixed;
-    z-index: 10;
-    padding: 20px;
-    max-width: 600px;
-    left: 35%;
-    width: 30%;
-    top: 35%;
-    text-align: center;
-    border-radius: 20px;
-    z-index: 2;
-    background: floralwhite;
-    box-shadow: 1px 1px 10px 1px black;
-    transition: all 0.25s ease;
-    animation-name: Modal;
-    animation-duration: .3s;
-    animation-timing-function: steps(cubic-bezier(0.19, 1, 0.22, 1));
+game #life img {
+    width: 45px;
+    height: 45px;
 }
 
-@keyframes Modal {
-    0% {
-        transform: scale(0);
-    }
-    100% {
-        transform: scale(1);
-    }
+game #life #life-bar {
+    height: 40px;
+    width: 200px;    
+    background: white;
+    border: 1px solid black;
 }
 
-modal button.closeBtn {
-    display: none;
-    cursor: pointer;
-    border: none;
-    background: transparent;
-    transition: all 0.2s linear;
+game #life #life-bar .progress-bar {
+    transition: all 0.15s ease-out;
 }
 
-modal button.closeBtn:hover {
-    color: red;
-}
 
-modal button.closeBtn:focus-within {
-    color: red;
-}
-
-modal button.closeBtn.active {
-    display: inline-block;
-}
-
-modal button:not(.closeBtn) {
-    margin: 5px auto;
-    min-width: 150px;
-}
-
-modal button.inactive {
-    display: none;
-}
-
-modal #scoreTime {
-    display: none;
-}
-
-modal alert {
-    display: none;
-    max-width: 250px;
-    margin: 10px auto;
-}
-
-modal alert.active {
-    display: block;
-}
-
-modal alert input[type=submit] {
-    position: absolute;
-    bottom: 13px;
-    right: 21px;
-    height: 36px;
-}
-
-blocker {
-    display: none;
-    text-align: center;
-}
-
-blocker.active {
-    display: block
-}
 
 /* ----- Login/Register modal */
 
@@ -604,36 +540,6 @@ footer a:hover, footer a:focus {
     color: blue
 }
 
-footer #birdPlacment {
-    position: fixed;
-    display: none;
-    width: 10%;
-    left: 45%;
-    bottom: 5px;
-    padding: 5px 15px;
-    background: black;
-    color: white;
-    border-radius: 20px;
-    box-shadow: 0 0 10px black;
-    text-align: center;
-}
-
-footer #birdPlacment .axis {
-    width: 47%;
-    display: inline-block
-}
-
-footer #birdPlacment strong {
-    color: yellow;
-}
-
-footer #birdPlacment i {
-    margin: 0px 10px;
-}
-
-footer #birdPlacment.active {
-    display: block;
-}
 
 /* ----- APPEARENCE ----- */
 
@@ -670,23 +576,64 @@ appearance img {
     outline: none !important;
 }
 
+@media only screen and (max-width: 1300px) {
+    game #life {
+        top: unset;
+        right: unset;
+        left: 10px;
+        bottom: 10px;
+    }
+
+}
+
+
 @media only screen and (max-width: 760px) {
-    home button#start {
+
+    header .cover {
+        height: 200px;
+    }
+
+    header .cover img {
+        top: -25px;
+    }
+
+    profile {
+        margin-inline: 15px;
+        width: auto;
+        left: unset;
+        right: 0;
+    }
+
+    profile .user-nickname {
         display: none;
     }
-    home h2.unsupport {
-        display: block;
-        font-size: 24px;
-        text-align: center;
-        color: white;
-        text-shadow: 0 0 2px black, 0 0 4px black;
+
+    game #bird {
+        height: 60px;
+        width: 60px;
     }
-    home h3.unsupportBottom {
-        display: block;
-        font-size: 16px;
-        text-align: center;
-        color: wheat;
-        text-shadow: 0 0 2px black, 0 0 4px black;
+
+    game #game-control-btns {
+        top: unset;
+        left: 0;
+        right: 0;
+        bottom: 0;    
+    }
+
+    game #game-control-btns .btn {
+        min-height: 50px;
+    }
+
+    game #life {
+        top: unset;
+        right: 0;
+        left: 0;
+        bottom: 40px;
+        padding-inline: 0px !important;
+    }
+
+    game #life #life-bar {
+        width: 80%;
     }
 
     modals #profilePreview .img {

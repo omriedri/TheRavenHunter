@@ -6,6 +6,7 @@ import { Records } from "./Records.js";
 export class UserInterface {
 
     static ELEMENTS = {
+        logo : document.querySelector('header .cover'),
         nav: document.querySelector('nav'),
         profile: document.querySelector('profile'),
         pages: document.querySelectorAll('.page'),
@@ -73,6 +74,12 @@ export class UserInterface {
         if(Page !== this.PAGES.GAME && GameInstance.isRunning()) {
             GameInstance.abort();
         }
+        if(Page !== this.PAGES.HOME) {
+            this.ELEMENTS.logo.classList.add('minimized');
+        } else {
+            this.ELEMENTS.logo.classList.remove('minimized');
+        }
+
     }
 
 

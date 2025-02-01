@@ -1,5 +1,11 @@
 <header>
-    <h1 class="title text-center my-2">The Bird Catcher</h1>
+    <div class="cover-wraaper position-fixed start-0 top-0 end-0 w-100">
+        <div class="cover d-flex justify-content-center align-items-center">
+            <img src="public/images/cover.png" alt="Logo">
+        </div>
+    </div>
+
+    <!-- <h1 class="title text-center my-2">The Bird Catcher</h1> -->
     <nav class="responsive-nav">
         <button class="trigger-button" aria-label="Open site navigation">
             <svg class="bi bi-list" viewBox="0 0 16 16">

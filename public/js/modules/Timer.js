@@ -5,7 +5,7 @@ export default class Timer {
 
     static = Timer;
     static ELEMENTS = {
-        restart: document.querySelector("game restart"),
+        restart: document.querySelector('game [action="restart"]'),
         timer: document.querySelector('game timer'),
     }
 
@@ -44,7 +44,7 @@ export default class Timer {
      */
     start() {
         this.interval = setInterval(() => this.#run(), 10);
-        this.static.ELEMENTS.restart.classList.add("active");
+        this.static.ELEMENTS.restart.removeAttribute('disabled');
     }
 
     /**
@@ -62,7 +62,7 @@ export default class Timer {
         clearInterval(this.interval);
         this.#setStartTimeByDifficulty();
         this.static.ELEMENTS.timer.innerHTML = this.getTimerString();
-        this.static.ELEMENTS.restart.classList.remove("active");
+        this.static.ELEMENTS.restart.setAttribute('disabled', 'disabled');
         this.running = false;
     }
 
