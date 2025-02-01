@@ -15,5 +15,5 @@ jobs:
           uses: SamKirkland/FTP-Deploy-Action@v4.3.5
           with:
             server: ftp.omriedri.co.il
-            username: master@the_raven_hunter.omriedri.co.il
+            username: raven@omriedri.co.il
             password: ${{ secrets.FTP_PASSWORD_MASTER }}
