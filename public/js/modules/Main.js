@@ -10,7 +10,7 @@ export class Main {
     HomeInstance = null;
     UIInstance = null;
     SettingsInstance = null;
-    GameInstance = Game;
+    GameInstance = null;
 
     static init() {
         return new Main().init();
@@ -29,6 +29,14 @@ export class Main {
      */
     getSettings() {
         return this.SettingsInstance;
+    }
+
+    /**
+     * Get current game instance
+     * @returns {Game}
+     */
+    getGame() {
+        return this.GameInstance;
     }
 
     /**

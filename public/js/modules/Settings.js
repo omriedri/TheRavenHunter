@@ -68,7 +68,16 @@ export class Settings {
         });
         this.eventsSetted = true;
     }
-        
+
+    getDifficultyName() {
+        switch(this.difficulty) {
+            case 1: return 'EASY';
+            case 2: return 'MEDIUM';
+            case 3: return 'HARD';
+            case 4: return 'INSANE';
+            default: return 'EASY';
+        }
+    }
 
     async updateSettings(e) {
         if(!(e instanceof Event)) return;

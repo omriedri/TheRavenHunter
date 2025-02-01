@@ -1,11 +1,13 @@
-export default class GameOverModal {
+export default class GameEndingModal {
 
-    static = GameOverModal;
-    static selector = '#GameOverModal';
+    static = GameEndingModal;
+    static selector = '#GameEndingModal';
     modal = new bootstrap.Modal(document.querySelector(this.static.selector));
     static ELEMENTS = {
-        BTN_EXIT: document.querySelector(`${GameOverModal.selector} [data-action="exit"]`),
-        BTN_TRY_AGAIN: document.querySelector(`${GameOverModal.selector} [data-action="restart"]`),
+        SCORE: document.querySelector(`${GameEndingModal.selector} #your-score`),
+        TIME: document.querySelector(`${GameEndingModal.selector} #your-time`),
+        BTN_EXIT: document.querySelector(`${GameEndingModal.selector} [data-action="exit"]`),
+        BTN_TRY_AGAIN: document.querySelector(`${GameEndingModal.selector} [data-action="restart"]`),
     }
 
     constructor() {
@@ -13,8 +15,9 @@ export default class GameOverModal {
     }
 
 
-    launch() {
+    launch(score = 0) {
         this.modal.show();
+        this.modal._element.querySelector('#your-score').innerText = score;
     }
 
 

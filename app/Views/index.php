@@ -22,6 +22,7 @@ require_once __DIR__ . '/../Services/AuthService.php';
         <?php require_once __DIR__ . '/modals/login.php'; ?>
         <?php require_once __DIR__ . '/modals/register.php'; ?>
         <?php require_once __DIR__ . '/modals/profile.php'; ?>
+        <?php require_once __DIR__ . '/modals/gameEnding.php'; ?>
         <?php require_once __DIR__ . '/modals/gameOver.php'; ?>
         <?php require_once __DIR__ . '/modals/privacyPolicy.php'; ?>
     </modals>
