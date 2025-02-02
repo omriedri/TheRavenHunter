@@ -24,6 +24,7 @@ export class Home {
 
     init() {
         console.log('Login module initialized');
+        window.oncontextmenu = () => false;
         Home.getUserState();
         Home.ELEMENTS.startGame.addEventListener('click', () => {
             MainInstance.GameInstance.start();
