@@ -1,4 +1,10 @@
 RewriteEngine On
-RewriteCond %{REQUEST_URI}  !(\.png|\.jpg|\.webp|\.gif|\.jpeg|\.zip|\.css|\.svg|\.js|\.pdf)$
-RewriteRule (.*) routes.php [QSA,L]
-DirectoryIndex public/index.php
+
+# Only process HTTP methods GET, POST, PUT, DELETE
+RewriteCond %{REQUEST_METHOD} ^(GET|POST|PUT|DELETE)$ [NC]
+
+# Exclude requests for existing files (like images, stylesheets, scripts, etc.)
+RewriteCond %{REQUEST_URI} !\.(jpe?g|png|gif|bmp|webp|svg|ico|css|js|woff|woff2|ttf|eot|otf|mp4|webm|avi|mp3|wav|pdf|zip|tar|gz|rar|7z)$ [NC]
+
+# Redirect all other requests to routes.php
+RewriteRule ^(.*)$ index.php [L,QSA]

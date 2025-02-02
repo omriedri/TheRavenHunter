@@ -26,7 +26,7 @@ class BaseResponse {
      * @param string $message
      * @return static
      */
-    public function setMessage(string $message): static {
+    public function setMessage(string $message): self {
         $this->message = $message;
         return $this;
     }
@@ -37,7 +37,7 @@ class BaseResponse {
      * @param string|null $message
      * @return static
      */
-    public function setSuccess(?string $message = null): static {
+    public function setSuccess(?string $message = null): self {
         $this->success = true;
         $this->message = $message ?? $this->message;
         return $this;
@@ -50,7 +50,7 @@ class BaseResponse {
      * @param int $status
      * @return BaseResponse
      */
-    public function setError(string $message = '', int $status = HttpStatus::BAD_REQUEST): BaseResponse {
+    public function setError(string $message = '', int $status = HttpStatus::BAD_REQUEST): self {
         $this->success = false;
         $this->status = $status;
         $this->message = empty($message) ? self::DEFAULT_ERROR_MESSAGE : $message;
