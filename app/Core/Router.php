@@ -94,7 +94,7 @@
 			}
 		}
 		if ($route == "/404") {
-			include_once self::APP_PATH . "/views/404.php";
+			include_once self::APP_PATH . "/Views/404.php";
 			exit();
 		}
 		$request_url = filter_var($_SERVER['REQUEST_URI'], FILTER_SANITIZE_URL);
