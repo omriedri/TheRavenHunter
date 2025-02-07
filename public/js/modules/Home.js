@@ -1,4 +1,4 @@
-import { Main, MainInstance } from './Main.js';
+import { MainInstance } from './Main.js';
 import LoginModal from './modals/LoginModal.js';
 import ProfileModal from './modals/ProfileModal.js';
 import RegisterModal from './modals/RegisterModal.js';
