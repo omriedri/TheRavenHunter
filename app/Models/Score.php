@@ -182,7 +182,7 @@ class Score extends \Aternos\Model\GenericModel {
             $this->fill($data);
             $this->status = self::STATUS__COMPLETE;
             $this->save();
-            $InstanceToReturn = Score::getUserBestScore($this->user_id, $this->platform);
+            $InstanceToReturn = Score::getUserScoreInstance($this->user_id, $this->platform);
         } elseif($SavedSession->score < $data['score']) {
             $SavedSession->fill($data);
             $SavedSession->save();
