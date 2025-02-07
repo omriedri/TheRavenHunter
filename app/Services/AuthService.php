@@ -63,6 +63,7 @@ class AuthService {
     public static function register(array $data = []): SimpleResponseData {
         $Response = new SimpleResponseData();
         $User = new User();
+        $User->id = null;
         $User->first_name = $data['first_name'];
         $User->last_name = $data['last_name'] ?? '';
         $User->gender = $data['gender'] ?? User::GENDER_UNKNOWN;

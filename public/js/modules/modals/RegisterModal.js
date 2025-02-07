@@ -54,12 +54,13 @@ export default class RegisterModal {
             event.submitter.disabled = true
             if(!FormHandler.checkFormValidity(this.form)) {
                 event.submitter.disabled = false;
-                new Notifier('', 'אנא מלא את כל השדות המודגשים בצורה תקינה', 'danger', 3000);
+                new Notifier('', 'Please fill the form correctly', 'danger', 3000);
                 return;
             }
-
+            const SubmittingNotifier = new Notifier('', 'Please wait...', 'info', 3000);
             const data = Utilities.formDataToRawObject(new FormData(this.form))
             const response = await AuthService.register(data);
+            SubmittingNotifier.hide();
             if(!response.success) {
                 new Notifier('', response.message, 'danger', 3000);
                 event.submitter.disabled = false;
