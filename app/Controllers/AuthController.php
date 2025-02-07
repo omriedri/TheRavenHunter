@@ -46,7 +46,6 @@ class AuthController extends BaseController {
         self::output($Response);
     }
 
-
     /**
      * Check if user is logged in
      * @return void
@@ -63,6 +62,33 @@ class AuthController extends BaseController {
             $Response->setData($data);
         } catch (\Throwable $e) {
             $Response->handleException($e);
+        }
+        self::output($Response);
+    }
+
+    /**
+     * Register a new user
+     * @return void
+     */
+    public static function register(): void {
+        $Response = new BaseResponse();
+        try {
+            $data = self::getReadyData(User::REGISTER_RULES);
+            if(AuthService::isUserEmailExists($data['email'])) {
+                throw new \Exception('Email already in use', 1001);
+            }
+            if(!empty($data['phone']) && AuthService::isUserPhoneExists($data['phone'])) {
+                throw new \Exception('Phone number already in use', 1001);
+            }
+            $RegisterResponse = AuthService::register($data);
+            if(!$RegisterResponse->status) {
+                throw new \Exception($RegisterResponse->message, 400);
+            }
+            $Response->setMessage($RegisterResponse->message);
+        } catch (\Throwable $e) {
+            $e->getCode() === 1001 ?
+                $Response->setMessage($e->getMessage()) :
+                $Response->handleException($e);
         }
         self::output($Response);
     }

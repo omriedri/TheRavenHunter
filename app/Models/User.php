@@ -30,10 +30,20 @@ class User extends \Aternos\Model\GenericModel {
 
     public const VALIDATION_RULES = [
         'first_name'        => 'required|min:2|max:48',
-        'last_name'         => 'required|min:2|max:48',
+        'last_name'         => 'min:2|max:48',
         'email'             => 'required|email:min:6|max:64',
         'password'          => 'required|min:8|max:32',
         'phone'             => 'min:10|max:16',
+    ];
+
+    public const REGISTER_RULES = [
+        'first_name'        => 'required|min:2|max:48',
+        'last_name'         => 'min:2|max:48',
+        'email'             => 'required|email|min:6|max:64',
+        'phone'             => 'min:10|max:16',
+        'password'          => 'required|min:8|max:32',
+        'password-confirm'  => 'required|same:password',
+        'images.image'      => 'uploaded_file|max:5M|mimes:jpeg,png',
     ];
 
     public const UPDATE_RULES = [
@@ -52,10 +62,10 @@ class User extends \Aternos\Model\GenericModel {
         'password'      => 'required|min:8|max:32',
     ];
 
-    protected const GENDER_UNKNOWN = 0;
-    protected const GENDER_MALE    = 1;
-    protected const GENDER_FEMALE  = 2;
-    protected const GENDER_OTHER   = 3;
+    public const GENDER_UNKNOWN = 0;
+    public const GENDER_MALE    = 1;
+    public const GENDER_FEMALE  = 2;
+    public const GENDER_OTHER   = 3;
 
     
 
@@ -134,7 +144,7 @@ class User extends \Aternos\Model\GenericModel {
      * @return boolean
      */
     public function isLoggedUser(): bool {
-        return AuthService::user()->id === $this->id;
+        return AuthService::user()->id ?? 0 === $this->id ?? 0;
     }
 
     /**

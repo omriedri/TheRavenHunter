@@ -1,27 +1,27 @@
 <!-- Register -->
-<div class="modal fade" id="regiserationModal" tabindex="-1" role="dialog" aria-labelledby="regiseration"
+<div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="registerModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
         <div class="modal-content">
             <form id="registerForm" class="active" name="registerForm" enctype="multipart/form-data">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="RegistrationModalLongTitle">Registration</h5>
+                    <h5 class="modal-title" id="registerModalTitle">Register</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body row text-left">
                     <div class="col-md-9">
                         <div class="row">
                             <div class="col-6">
-                                <div class="form-group-sm firstname required">
+                                <div class="form-group-sm first_name required">
                                     <label for="firstname">First Name <span class="text-danger"> *</span></label>
-                                    <input class="form-control form-control-sm" type="text" name="firstname"
+                                    <input class="form-control form-control-sm" type="text" name="first_name"
                                         required="required" aria-required="true" maxlength="15">
                                 </div>
                             </div>
                             <div class="col-6">
-                                <div class="form-group-sm lastname">
+                                <div class="form-group-sm last_name">
                                     <label for="lastname">Last Name</label>
-                                    <input class="form-control form-control-sm" type="text" name="lastname"
+                                    <input class="form-control form-control-sm" type="text" name="last_name"
                                         maxlength="15">
                                 </div>
                             </div>
@@ -32,8 +32,9 @@
                                     <label for="country">Your Gender <span class="text-danger"> *</span></label>
                                     <select class="form-control form-control-sm" name="gender" name="gender"
                                         required>
-                                        <option value="M">Male</option>
-                                        <option value="F">Female</option>
+                                        <option value="1">Male</option>
+                                        <option value="2">Female</option>
+                                        <option value="3">Other</option>
                                     </select>
                                 </div>
                             </div>
@@ -56,10 +57,10 @@
                                 </div>
                             </div>
                             <div class="col-6">
-                                <div class="form-group-sm repassword required">
+                                <div class="form-group-sm password-retype required">
                                     <label for="repassword">Retype Password <span class="text-danger"> *</span>
                                     </label>
-                                    <input class="form-control form-control-sm" type="password" name="repassword"
+                                    <input class="form-control form-control-sm" type="password" name="password-confirm"
                                         required="required" aria-required="true" autocomplete="off" maxlength="25">
                                 </div>
                             </div>
@@ -88,8 +89,6 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <input type="hidden" name="userTimeZone">
-                    <input type="hidden" name="registerData">
                     <button type="button" class="fb-btn fb-register-btn p-0 ml-3" onclick="facebook.login()">
                         <img src="<?= PathHelper::image('fb-continiue-btn.png') ?>" alt="Continue with Facebook">
                     </button>

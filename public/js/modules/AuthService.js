@@ -1,5 +1,6 @@
 import { Utilities } from "./Utilities.js";
 import { AuthResponse } from "./responses/AuthResponse.js";
+import { BaseResponse } from "./responses/BaseResponse.js";
 import { MainInstance } from "./Main.js";
 import { Notifier } from "./Notifier.js";
 import { UserInterface } from "./UI.js";
@@ -43,6 +44,17 @@ export class AuthService {
             }
         }
         return Response;
+    }
+
+    /**
+     * Register the user
+     * 
+     * @param {object} data 
+     * @returns {Promise<BaseResponse>}
+     */
+    static async register(data = {}) {
+        const response = await Utilities.sendFetch('auth/register', 'POST', data);
+        return response;
     }
 
     /**

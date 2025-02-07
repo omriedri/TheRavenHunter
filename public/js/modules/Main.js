@@ -24,6 +24,14 @@ export class Main {
     }
 
     /**
+     * Get current home instance
+     * @returns {Home}
+     */
+    getHome() {
+        return this.HomeInstance;
+    }
+
+    /**
      * Get current settings 
      * @returns {Settings}
      */

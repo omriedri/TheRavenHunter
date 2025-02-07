@@ -37,7 +37,7 @@
                 <button class="cta-btn" data-bs-toggle="modal" data-bs-target="#loginModal" rel="nofollow noopener">Log-In</button>
             </div>
             <div class="button_cont">
-                <button class="cta-btn" data-bs-toggle="modal" data-bs-target="#regiserationModal">Register</button>
+                <button class="cta-btn" data-bs-toggle="modal" data-bs-target="#registerModal" rel="nofollow noopener">Register</button>
             </div>
         </div>
     </div>

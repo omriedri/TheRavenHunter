@@ -1,6 +1,7 @@
 import { Main, MainInstance } from './Main.js';
 import LoginModal from './modals/LoginModal.js';
 import ProfileModal from './modals/ProfileModal.js';
+import RegisterModal from './modals/RegisterModal.js';
 import { UserInterface } from './UI.js';
 import { Utilities } from './Utilities.js';
 export class Home {
@@ -8,6 +9,7 @@ export class Home {
     static = Home;
     MODALS = {
         login: new LoginModal(),
+        register: new RegisterModal(),
         profile: new ProfileModal()
     }
 

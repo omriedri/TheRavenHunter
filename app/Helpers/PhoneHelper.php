@@ -19,11 +19,12 @@ class PhoneHelper {
 
     /**
      * Renders phone number to full format
-     * @param string $phone
+     * @param string|null $phone
      * @param string $country
      * @return string
      */
-    public static function renderToFullFormat($phone = "", $country = 'IL') : string {
+    public static function renderToFullFormat(?string $phone = "", $country = 'IL') : string {
+        if(empty($phone)) return "";
         $newPhone = preg_replace("/ /", "", $phone);
 
         if($country === 'IL' && preg_match(static::REGEX_IL_SHORT, $newPhone)) {
@@ -35,11 +36,12 @@ class PhoneHelper {
 
     /**
      * Renders phone number to short format
-     * @param string $phone
+     * @param string|null $phone
      * @param string $country
      * @return string
      */
-    public static function renderToShortFormat($phone = "", $country = 'IL') : string {
+    public static function renderToShortFormat(?string $phone = "", $country = 'IL') : string {
+        if(empty($phone)) return "";
         $newPhone = preg_replace("/ |\+|\D+/", "", $phone);
 
         if($country === 'IL' && preg_match(static::REGEX_IL, $newPhone)) {

@@ -1,6 +1,10 @@
-<?php 
+<?php
+
+use Aternos\Model\Query\Limit;
+
 require_once __DIR__ . '/../Models/User.php';
 require_once __DIR__ . '/../Helpers/TimeHelper.php';
+require_once __DIR__ . '/../Helpers/PhoneHelper.php';
 require_once __DIR__ . '/../Exceptions/AuthException.php';
 require_once __DIR__ . '/../Enums/HttpStatus.php';
 require_once __DIR__ . '/../Responses/BaseResponse.php';
@@ -52,6 +56,39 @@ class AuthService {
     }
 
     /**
+     * Register a new user
+     * @param array $data
+     * @return SimpleResponseData
+     */
+    public static function register(array $data = []): SimpleResponseData {
+        $Response = new SimpleResponseData();
+        $User = new User();
+        $User->first_name = $data['first_name'];
+        $User->last_name = $data['last_name'] ?? '';
+        $User->gender = $data['gender'] ?? User::GENDER_UNKNOWN;
+        $User->email = $data['email'];
+        $User->phone = PhoneHelper::renderToFullFormat($data['phone'] ?? '') ?: null;
+        $User->password = self::generatePassword($data['password']);
+        try {
+            if(!empty($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
+                $UploadResponse = FileUploadService::uploadImage($_FILES['image']);
+                if($UploadResponse->status) {
+                    $User->image = $UploadResponse->data['filename'];
+                }
+            }
+        } catch (\Throwable $e) {
+            $User->image = null;
+        }
+        if(!$User->save()) {
+            $Response->setError('Failed to register');
+        } else {
+            $Response->setSuccess('You have registered successfully');
+            $Response->setData($User->getUserInfo());    
+        }
+        return $Response;
+    }
+
+    /**
      * Get logged in user instance
      * @return User|null
      */
@@ -99,5 +136,18 @@ class AuthService {
      */
     public static function setUserSession(User $User): bool {
         return (bool) $_SESSION['User'] = serialize($User);
+    }
+
+    /**
+     * Check if user email exists
+     * @param string $email
+     * @return boolean
+     */
+    public static function isUserEmailExists(string $email): bool {
+        return User::select(['email' => $email], null, null, new Limit(1))->count() > 0;
+    }
+
+    public static function isUserPhoneExists(string $phone): bool {
+        return User::select(['phone' => PhoneHelper::renderToFullFormat($phone)], null, null, new Limit(1))->count() > 0;
     }
 }
