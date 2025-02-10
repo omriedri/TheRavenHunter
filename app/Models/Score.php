@@ -214,7 +214,7 @@ class Score extends \Aternos\Model\GenericModel {
                 $score = 70000;
                 break;
             case self::DIFFICULTY_INSANE:
-                $score = 10000;
+                $score = 100000;
                 break;
         }
         $score = (int) ($score - ($miliSeconds * 0.75));

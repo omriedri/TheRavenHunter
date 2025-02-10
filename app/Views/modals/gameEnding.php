@@ -7,15 +7,16 @@
             </div>
             <div class="modal-body text-center">
                 <h2>Congratulations!</h2>
-                <p>You have catched the raven!</p>
-                <div class="d-flex flex-column justify-content-evenly align-items-center">
+                <img src="public/images/shooted.png" alt="Shooted Raven">
+                <p>You have successfully defeated the raven!</p>
+                <div class="d-flex flex-row-reverse justify-content-evenly align-items-center">
                     <div class="score">
                         <span class="h6">Your Score</span>
                         <h3 id="your-score" class="h2">0</h3>
                     </div>
                     <div class="time">
-                        <span class="h6">Time left</span>
-                        <span id="your-time">00:00:00</span>
+                        <span class="h6">Time Left</span>
+                        <h3 id="your-time">00:00:00</h3>
                     </div>
                 </div>
             </div>

@@ -21,6 +21,8 @@ export class Game {
         HIT: new Audio('/public/sounds/hit.mp3'),
         KILL: new Audio('/public/sounds/kill.mp3'),
         MOVE: new Audio('/public/sounds/move.mp3'),
+        SHOT: new Audio('/public/sounds/shot-slow.mp3'),
+        OVER: new Audio('/public/sounds/game-over.mp3'),
     }
 
     GameEndingModal = new GameEndingModal();
@@ -74,7 +76,9 @@ export class Game {
     #setListeners() {
         Game.ELEMENTS.RESTART.addEventListener('click', () => this.restart());
         Game.ELEMENTS.EXIT_BTN.addEventListener('click', () => this.exit());
+        Game.ELEMENTS.CAGE.addEventListener('mousedown', (e) => this.#shot(e));
         Game.ELEMENTS.BIRD.addEventListener('mousedown', (e) => this.#hitBird(e));
+        Game.ELEMENTS.BIRD.addEventListener('touchstart', (e) => this.#shot(e));
         Game.ELEMENTS.BIRD.addEventListener('touchstart', (e) => this.#hitBird(e));
         GameEndingModal.ELEMENTS.BTN_EXIT.addEventListener('click', () => this.exit());
         GameEndingModal.ELEMENTS.BTN_TRY_AGAIN.addEventListener('click', () => this.restart());
@@ -123,16 +127,25 @@ export class Game {
         this.static.ELEMENTS.BIRD.classList.toggle('disappear');
     }
 
+    #shot() {
+        if(!this.isRunning()) return;
+        this.SOUNDS.SHOT.currentTime = 0;
+        this.SOUNDS.SHOT.play();
+    }
+
     #hitBird(event) {
         if(!this.isRunning()) return;
         if(event instanceof MouseEvent && !this.#isMouseOverTheBird(event)) return;
         this.hitCounts++;
         this.#setBirdLifePrecentage();
         if(this.hitCounts >= this.#getRequiredHitsByDifficulty()) {
+            this.SOUNDS.SHOT.currentTime = 0;
+            this.SOUNDS.SHOT.play();
             this.SOUNDS.KILL.play();
             this.end();
             return;
         }
+        this.SOUNDS.HIT.currentTime = 0;
         this.SOUNDS.HIT.play();
         this.#moveBird();
     }
@@ -218,6 +231,8 @@ export class Game {
     gameOver() {
         this.abort();
         this.GameOverModal.launch();
+        this.SOUNDS.OVER.currentTime = 0;
+        this.SOUNDS.OVER.play();
     }
 
     #showGameEndingModal() {

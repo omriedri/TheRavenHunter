@@ -27,7 +27,9 @@
             <p>Thanks for logging in, <span data-user-name></span></p>
         </div>
         <div class="login-register-section text-center">
-            <button id="start" class="show noSelect">Click To Start</button>
+            <button id="start" class="show noSelect">
+                <span class="d-none d-lg-inline">Click To </span>Start
+            </button>
         </div>
     </div>
     <div class="logged-out-section d-none">

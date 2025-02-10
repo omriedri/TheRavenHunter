@@ -6,9 +6,9 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body text-center pt-4">
-                <h2 class="mb-4">Game Over</h2>
-                <p class="mb-1">You have lost the game!</p>
-                <p class="mt-0">The time is over, try better next time!</p>
+                <h2 class="mb-3">Game Over</h2>
+                <img src="public/images/escaped.png" alt="Jokking Raven">
+                <p class="mt-3 mb-0">The time is over, try better next time!</p>
             </div>
             <div class="modal-footer border-0 d-flex justify-content-center">
                 <button type="button" class="btn btn-secondary" data-action="exit"    data-bs-dismiss="modal" style="width: 100px;">Exit</button>
