@@ -16,12 +16,12 @@
                         </div>
                         <div class="form-group-sm password required">
                             <label for="password">Password <span class="text-danger"> *</span></label>
-                            <a class="login-dialog-tab-control float-right mt-2" href="#" data-tab="forget"
-                                role="button">Forget Password?</a>
                             <input class="form-control form-control-sm" type="password" name="password"
                                 required="required" aria-required="true" maxlength="25">
                         </div>
-
+                        <div class="password-forgot my-2">
+                            <a class="login-dialog-tab-control float-right" href="#" data-form-switch="FORGOT_PASSWORD" role="button">Forgot Password?</a>
+                        </div>
                     </div>
                     <div class="col-md-3 d-none d-md-block">
                         <div class="form-group-sm image d-mv-none">
@@ -35,15 +35,6 @@
                         </div>
                         <div class="form-group-sm submit mt-3"></div>
                     </div>
-                    <div class="col-sm-12">
-                        <div class="launch-full-screen">
-                            <input type="checkbox" class="mr-1 ml-1" id="login-fullscreen-toggle">
-                            <label for="launch-full-screen">Full-Screen Mode</label>
-                        </div>
-                    </div>
-                    <div class="col md-12">
-                        <div id="BEstatus" class="pt-2"></div>
-                    </div>
                 </div>
                 <div class="modal-footer">
                     <input type="hidden" name="loginData">
@@ -55,36 +46,32 @@
             <form id="forgetPasswordForm" name="forgetPassword">
                 <div class="modal-header">
                     <h5 class="modal-title" id="forgetPasswordModalLongTitle">Forget Your Password</h5>
-                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body row text-left">
-                    <div class="col-md-9">
+                    <div class="col-12">
                         <div class="form-group-sm email required">
                             <label for="email">Your Email <span class="text-danger"> *</span></label>
                             <input class="form-control form-control-sm" type="email" name="email"
                                 required="required" aria-required="true" maxlength="50">
                         </div>
+                        
                     </div>
-                    <div class="col-md-3"></div>
-                    <div class="col md-12">
-                        <div id="BEstatus" class="pt-2"></div>
+                    <div class="col-12 mt-2">
+                        <p>We will send you an email with a validation key to reset your password.</p>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <input type="hidden" name="forgetPassword">
                     <button type="button" class="btn btn-secondary cancel login-dialog-tab-control"
-                        data-tab="login">Cancel</button>
+                        data-form-switch="LOGIN">Back</button>
                     <button type="submit" class="btn btn-primary resetPassword">Continue</button>
                 </div>
             </form>
             <form id="resetPasswordForm" name="resetPassword">
                 <div class="modal-header">
                     <h5 class="modal-title" id="resetPasswordModalLongTitle">Create New Password</h5>
-                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body row text-left">
                     <div class="col-md-9">
@@ -114,7 +101,7 @@
                 <div class="modal-footer">
                     <input type="hidden" name="resetPassword">
                     <button type="button" class="btn btn-secondary cancel login-dialog-tab-control"
-                        data-tab="login">Cancel</button>
+                        data-tab="LOGIN">Cancel</button>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
             </form>

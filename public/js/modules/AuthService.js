@@ -74,4 +74,15 @@ export class AuthService {
     static getLoggedUser() {
         return MainInstance.LoggedUser;
     }
+
+    /**
+     * Get the verification code
+     * 
+     * @param {string} email 
+     * @returns {Promise<BaseResponse>}
+     */
+    static async getVerificationCode(email) {
+        const response = await Utilities.sendFetch('auth/get-verify-email', 'POST', { email });
+        return response;
+    }
 }

@@ -92,4 +92,41 @@ class AuthController extends BaseController {
         }
         self::output($Response);
     }
+
+    /**
+     * Send verification email (validation key)
+     * @return void
+     */
+    public static function sendVerifyEmail(): void {
+        $Response = new BaseResponse();
+        try {
+            $data = self::getReadyData(['email' => 'required|email']);
+            $ValidationResponse = AuthService::sendVerificationEmail($data['email']);
+            $ValidationResponse->status ? 
+                $Response->setMessage($ValidationResponse->message) :
+                $Response->setError($ValidationResponse->message, 400);
+        } catch (\Throwable $e) {
+            $Response->handleException($e);
+        }
+        self::output($Response);
+    }
+
+    /**
+     * Verify user email
+     * @return void
+     */
+    public static function verifyEmail() {
+        $Response = new BaseResponse();
+        try {
+            $data = self::getReadyData(['validationKey' => 'required|string|size:32']);
+            $VerifyResponse = AuthService::verifyEmail($data['validationKey']);
+            $VerifyResponse->status ?
+                $Response->setMessage($VerifyResponse->message) :
+                $Response->setError($VerifyResponse->message, 400);
+        } catch (\Throwable $e) {
+            $Response->handleException($e);
+        }
+        self::output($Response);
+        
+    }
 }

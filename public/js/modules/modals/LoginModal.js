@@ -3,8 +3,6 @@ import { Notifier } from "../Notifier.js";
 import { FormHandler } from "../FormHandler.js";
 import { Home } from "../Home.js";
 import { AuthService } from "../AuthService.js";
-import { UserInterface } from "../UI.js";
-import { Settings } from "../Settings.js";
 import { MainInstance } from "../Main.js";
 
 
@@ -17,8 +15,39 @@ export default class LoginModal {
         SHOW: new Audio('/public/sounds/modal-show.mp3'),
     }
 
+    ELEMENTS = {
+        FORMS: {
+            LOGIN: document.querySelector('#loginForm'),
+            FORGOT_PASSWORD: document.querySelector('#forgetPasswordForm'),
+            RESET_PASSWORD: document.querySelector('#resetPasswordForm'),
+        },
+        RESET_PASSWORD_BTN: document.querySelector('#resetPasswordBtn'),
+    }
+
+
     constructor() {
         this.initEvents();
+    }
+
+    /**
+     * Navigate between forms on the login modal
+     */
+    #modalFormsNavigation() {
+        this.modal._element.querySelectorAll('[data-form-switch]').forEach(btn => { 
+            btn.addEventListener('click', (e) => {
+                const formName = e.target.getAttribute('data-form-switch').toUpperCase() ?? 'LOGIN';
+                this.switchForm(this.ELEMENTS.FORMS[formName]);
+            });
+        });
+    }
+
+    /**
+     * Switch between forms
+     * @param {HTMLFormElement} form
+     */
+    switchForm(form) {
+        Object.values(this.ELEMENTS.FORMS).forEach(f => f.classList.remove('active'));
+        form.classList.add('active');
     }
 
 
@@ -81,13 +110,41 @@ export default class LoginModal {
             event.submitter.disabled = false;
         }
     }
+
+    /**
+     * Get the verification code for password reset
+     * @param {SubmitEvent} event
+     * @returns {void}
+     */
+    async getVerificationCode(event) {
+        try {
+            if(!(event instanceof SubmitEvent)) return;
+            event.preventDefault();
+            const email = event.target.querySelector('input[name="email"]').value;
+            if (!email || !(/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))) {
+                new Notifier('', 'אנא הזן כתובת אימייל תקינה', 'danger', 3000);
+                return;
+            }
+            const response = await AuthService.getVerificationCode(email);
+            if(!response.success) {
+                new Notifier('', response.message, 'danger', 3000);
+                return;
+            }
+            new Notifier('', response.message, 'success', 3000);
+            this.switchForm(this.ELEMENTS.FORMS.FORGOT_PASSWORD);
+        } catch (error) {
+            new Notifier('', error?.message ?? error, 'danger', 3000);
+        }
+    }
     
     /**
      * @returns {boolean}
      */
     initEvents() {
+        this.#modalFormsNavigation();
         this.form.handler = new FormHandler(this.form);
-        this.form.addEventListener('submit', (event) => this.login(event));
+        this.ELEMENTS.FORMS.LOGIN.addEventListener('submit', (event) => this.login(event));
+        this.ELEMENTS.FORMS.FORGOT_PASSWORD.addEventListener('submit', (e) => this.getVerificationCode(e));
         this.modal._element.addEventListener('show.bs.modal', () => this.#showingPreviewModal());
         this.modal._element.addEventListener('hidden.bs.modal', () => this.#hidingPreviewModal());
         return true;

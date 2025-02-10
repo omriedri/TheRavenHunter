@@ -2,6 +2,7 @@
 
 use Aternos\Model\Query\Limit;
 
+require_once __DIR__ . '/EmailService.php';
 require_once __DIR__ . '/../Models/User.php';
 require_once __DIR__ . '/../Helpers/TimeHelper.php';
 require_once __DIR__ . '/../Helpers/PhoneHelper.php';
@@ -87,6 +88,117 @@ class AuthService {
             $Response->setData($User->getUserInfo());    
         }
         return $Response;
+    }
+
+    /**
+     * Send validation key to user email
+     * @param string $email
+     * @return SimpleResponse
+     */
+    public static function sendVerificationEmail($email = ''): SimpleResponse {
+        $Response = new SimpleResponse();
+        if(filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
+            $Response->setError('Invalid email');
+            return $Response;
+        }
+        if(!self::isUserEmailExists($email)) {
+            $Response->setError('Email not found');
+            return $Response;
+        }
+        $User = User::select(['email' => $email], null, null, 1)[0];
+        $verification_key = bin2hex(random_bytes(6));
+        $subject = 'Validation Key Verification';
+        $message = self::getVerficationEmailHTML($verification_key, $User->first_name);
+        if(EmailService::sendNoReplayEmail($email, $subject, $message)) {
+            $_SESSION['VerificationKey'] = $verification_key;
+            $Response->setSuccess('Validation key has been sent to your email');
+        } else {
+            $Response->setError('Failed to send validation key');
+        }
+        return $Response;
+    }
+
+    /**
+     * Verify user email
+     * @param string $key
+     * @return SimpleResponse
+     */
+    public static function verifyEmail(string $key = '') {
+        $Response = new SimpleResponse();
+        if(empty($key)) {
+            $Response->setError('Validation key is required');
+            return $Response;
+        }
+        if(!self::isUserEmailExists($key)) {
+            $Response->setError('Email not found');
+            return $Response;
+        }
+        if($key === $_SESSION['VerificationKey'] ?? '') {
+            $Response->setSuccess('Email has been verified');
+        } else {
+            $Response->setError('Invalid validation key');
+        }
+        return $Response;
+    }
+
+    /**
+     * Get verification email HTML
+     * @param string $key
+     * @param string $name
+     * @return string
+     */
+    private static function getVerficationEmailHTML($key, $name) {
+        $compayName = $_ENV['COMPANY_NAME'] ?? 'The Raven Hunter';
+        return '
+            <html>
+            <head>
+                <style>
+                    body {
+                        font-family: Arial, sans-serif;
+                        line-height: 1.6;
+                        color: #333;
+                    }
+                    .container {
+                        width: 80%;
+                        margin: 0 auto;
+                        padding: 20px;
+                        border: 1px solid #ddd;
+                        border-radius: 5px;
+                        background-color: #f9f9f9;
+                    }
+                    .header {
+                        text-align: center;
+                        padding-bottom: 20px;
+                    }
+                    .content {
+                        padding: 20px;
+                    }
+                    .footer {
+                        text-align: center;
+                        padding-top: 20px;
+                        font-size: 0.9em;
+                        color: #777;
+                    }
+                </style>
+            </head>
+            <body>
+                <div class="container">
+                    <div class="header">
+                        <h2>Validation Key Verification</h2>
+                    </div>
+                    <div class="content">
+                        <p>Dear ' . $name . ',</p>
+                        <p>Your validation key is: <strong>{$key}</strong></p>
+                        <p>Please use this key to verify your email address.</p>
+                        <p>Thank you!</p>
+                    </div>
+                    <div class="footer">
+                        <p>&copy;' . date('Y') . ' '. $compayName . ', All rights reserved.</p>
+                    </div>
+                </div>
+            </body>
+            </html>
+        ';
     }
 
     /**
