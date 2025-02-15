@@ -149,13 +149,13 @@ export default class LoginModal {
             if(!(event instanceof SubmitEvent)) return;
             event.preventDefault();
             const formData = Utilities.formDataToRawObject(new FormData(event.target));
-            const { password, confirm_password, verification_code: code } = formData;
-            if(password !== confirm_password) {
+            const { password, password_confirm, verification_code: code } = formData;
+            if(password !== confirm_paspassword_confirmsword) {
                 new Notifier('', 'הסיסמאות אינן תואמות', 'danger', 3000);
                 return;
             }
             const email = this.ELEMENTS.FORMS.FORGOT_PASSWORD?.querySelector('[name=email]')?.value ?? '';
-            const response = await AuthService.resetPassword(email, password, confirm_password, code);
+            const response = await AuthService.resetPassword(email, password, password_confirm, code);
             if(!response.success) {
                 new Notifier('', response.message, 'danger', 3000);
                 return;

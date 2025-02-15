@@ -95,7 +95,7 @@
                     <div class="col-md-3"> </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary cancel" data-form-switch="LOGIN">Cancel</button>
+                    <button type="button" class="btn btn-secondary cancel" data-form-switch="FORGOT_PASSWORD">Cancel</button>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
             </form>
