@@ -91,7 +91,7 @@ class AuthService {
     }
 
     /**
-     * Send validation key to user email
+     * Send verification email
      * @param string $email
      * @return SimpleResponse
      */
@@ -107,36 +107,32 @@ class AuthService {
         }
         $User = User::select(['email' => $email], null, null, 1)[0];
         $verification_key = bin2hex(random_bytes(6));
-        $subject = 'Validation Key Verification';
+        $subject = 'Verification Code';
         $message = self::getVerficationEmailHTML($verification_key, $User->first_name);
         if(EmailService::sendNoReplayEmail($email, $subject, $message)) {
-            $_SESSION['VerificationKey'] = $verification_key;
-            $Response->setSuccess('Validation key has been sent to your email');
+            $_SESSION['verification_code'] = $verification_key;
+            $Response->setSuccess('Verification key has been sent to your email');
         } else {
-            $Response->setError('Failed to send validation key');
+            $Response->setError('Failed to send Verification key');
         }
         return $Response;
     }
 
     /**
      * Verify user email
-     * @param string $key
+     * @param string $verification_code
      * @return SimpleResponse
      */
-    public static function verifyEmail(string $key = '') {
+    public static function verifyEmail(string $verification_code = '') {
         $Response = new SimpleResponse();
         if(empty($key)) {
-            $Response->setError('Validation key is required');
+            $Response->setError('Invalid verification code');
             return $Response;
         }
-        if(!self::isUserEmailExists($key)) {
-            $Response->setError('Email not found');
-            return $Response;
-        }
-        if($key === $_SESSION['VerificationKey'] ?? '') {
+        if($verification_code === $_SESSION['verification_code'] ?? '') {
             $Response->setSuccess('Email has been verified');
         } else {
-            $Response->setError('Invalid validation key');
+            $Response->setError('Invalid verification code');
         }
         return $Response;
     }
@@ -147,7 +143,7 @@ class AuthService {
      * @param string $name
      * @return string
      */
-    private static function getVerficationEmailHTML($key, $name) {
+    private static function getVerficationEmailHTML($code, $name) {
         $compayName = $_ENV['COMPANY_NAME'] ?? 'The Raven Hunter';
         return '
             <html>
@@ -184,12 +180,12 @@ class AuthService {
             <body>
                 <div class="container">
                     <div class="header">
-                        <h2>Validation Key Verification</h2>
+                        <h2>Vefication Code</h2>
                     </div>
                     <div class="content">
                         <p>Dear ' . $name . ',</p>
-                        <p>Your validation key is: <strong>{$key}</strong></p>
-                        <p>Please use this key to verify your email address.</p>
+                        <p>Your verification code is: <strong>' . $code . '</strong></p>
+                        <p>Please use this code to in the form to reset your password.</p>
                         <p>Thank you!</p>
                     </div>
                     <div class="footer">
@@ -199,6 +195,28 @@ class AuthService {
             </body>
             </html>
         ';
+    }
+
+    /**
+     * Reset user password
+     * @param string $email
+     * @param string $password
+     * @return SimpleResponse
+     */
+    public static function resetPassword(string $email, string $password): SimpleResponse {
+        $Response = new SimpleResponse();
+        if(!self::isUserEmailExists($email)) {
+            $Response->setError('Email not found');
+            return $Response;
+        }
+        $User = User::select(['email' => $email], null, null, 1)[0];
+        $User->password = self::generatePassword($password);
+        if(!$User->save()) {
+            $Response->setError('Failed to reset password');
+        } else {
+            $Response->setSuccess('Password has been reset successfully');
+        }
+        return $Response;
     }
 
     /**

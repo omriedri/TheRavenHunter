@@ -12,8 +12,10 @@ Router::get('/auth/check', fn() => AuthController::check());
 Router::post('/auth/login', fn() => AuthController::login());
 Router::post('/auth/logout', fn() => AuthController::logout());
 Router::post('/auth/register', fn() => AuthController::register());
-Router::post('/auth/get-verify-email', fn() => AuthController::sendVerifyEmail());
 Router::post('/auth/verify-email', fn() => AuthController::verifyEmail());
+Router::post('/auth/get-verify-email', fn() => AuthController::sendVerifyEmail());
+Router::post('/auth/reset-password', fn() => AuthController::verifyResetPassword());
+
 
 Router::get('/api/users/get/$id', fn($id) => UserController::get($id));
 Router::post('/api/users/create', fn() => UserController::create());

@@ -11,7 +11,7 @@ class StringHelper {
      * @return string
      */
     public static function cleanSpecialChars(string $string): string {
-        return preg_replace('/[^A-Za-z0-9\-א-ת]/', '', $string);
+        return preg_replace('/[^A-Za-z0-9\-א-ת\s]/', '', $string);
     }
 
     /**

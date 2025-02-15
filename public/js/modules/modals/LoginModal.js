@@ -70,8 +70,10 @@ export default class LoginModal {
      * The function sets default values while the preview modal is closing
      */
     #hidingPreviewModal() {
-        this.form.reset();
-        FormHandler.cleanFormInputs(this.form);
+        Object.values(this.ELEMENTS.FORMS).forEach(f => {
+            f?.reset();
+            FormHandler.cleanFormInputs(f);
+        });
     }
 
     /**
@@ -131,7 +133,32 @@ export default class LoginModal {
                 return;
             }
             new Notifier('', response.message, 'success', 3000);
-            this.switchForm(this.ELEMENTS.FORMS.FORGOT_PASSWORD);
+            this.switchForm(this.ELEMENTS.FORMS.RESET_PASSWORD);
+        } catch (error) {
+            new Notifier('', error?.message ?? error, 'danger', 3000);
+        }
+    }
+
+    async resetPassword(event) {
+        try {
+            if(!(event instanceof SubmitEvent)) return;
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const password = formData.get('password');
+            const confirmPassword = formData.get('confirmPassword');
+            if(password !== confirmPassword) {
+                new Notifier('', 'הסיסמאות אינן תואמות', 'danger', 3000);
+                return;
+            }
+            const email = formData.get('email');
+            const code = formData.get('code');
+            const response = await AuthService.resetPassword(email, password, code);
+            if(!response.success) {
+                new Notifier('', response.message, 'danger', 3000);
+                return;
+            }
+            new Notifier('', response.message, 'success', 3000);
+            this.switchForm(this.ELEMENTS.FORMS.LOGIN);
         } catch (error) {
             new Notifier('', error?.message ?? error, 'danger', 3000);
         }

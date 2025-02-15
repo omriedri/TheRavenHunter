@@ -60,7 +60,7 @@
                                 <div class="form-group-sm password-retype required">
                                     <label for="repassword">Retype Password <span class="text-danger"> *</span>
                                     </label>
-                                    <input class="form-control form-control-sm" type="password" name="password-confirm"
+                                    <input class="form-control form-control-sm" type="password" name="password_confirm"
                                         required="required" aria-required="true" autocomplete="off" maxlength="25">
                                 </div>
                             </div>

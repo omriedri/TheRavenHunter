@@ -42,7 +42,7 @@ class User extends \Aternos\Model\GenericModel {
         'email'             => 'required|email|min:6|max:64',
         'phone'             => 'min:10|max:16',
         'password'          => 'required|min:8|max:32',
-        'password-confirm'  => 'required|same:password',
+        'password_confirm'  => 'required|same:password',
         'images.image'      => 'uploaded_file|max:5M|mimes:jpeg,png',
     ];
 
@@ -60,6 +60,13 @@ class User extends \Aternos\Model\GenericModel {
     public const AUTH_RULES = [
         'email'         => 'required|email',
         'password'      => 'required|min:8|max:32',
+    ];
+
+    public const RESET_PASSWORD_RULES = [
+        'email'         => 'required|email',
+        'password'      => 'required|min:8|max:32',
+        'password_confirm' => 'required|same:password',
+        'verification_code' => 'required|string|size:32',
     ];
 
     public const GENDER_UNKNOWN = 0;

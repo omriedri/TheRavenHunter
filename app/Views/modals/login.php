@@ -20,7 +20,7 @@
                                 required="required" aria-required="true" maxlength="25">
                         </div>
                         <div class="password-forgot my-2">
-                            <a class="login-dialog-tab-control float-right" href="#" data-form-switch="FORGOT_PASSWORD" role="button">Forgot Password?</a>
+                            <a class="float-right" href="#" data-form-switch="FORGOT_PASSWORD" role="button">Forgot Password?</a>
                         </div>
                     </div>
                     <div class="col-md-3 d-none d-md-block">
@@ -58,14 +58,13 @@
                         
                     </div>
                     <div class="col-12 mt-2">
-                        <p>We will send you an email with a validation key to reset your password.</p>
+                        <p>We will send you an email with a verification code to reset your password.</p>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <input type="hidden" name="forgetPassword">
-                    <button type="button" class="btn btn-secondary cancel login-dialog-tab-control"
-                        data-form-switch="LOGIN">Back</button>
-                    <button type="submit" class="btn btn-primary resetPassword">Continue</button>
+                    <button type="button" class="btn btn-secondary" data-form-switch="LOGIN">Back</button>
+                    <button type="submit" class="btn btn-primary">Continue</button>
                 </div>
             </form>
             <form id="resetPasswordForm" name="resetPassword">
@@ -76,32 +75,27 @@
                 <div class="modal-body row text-left">
                     <div class="col-md-9">
                         <div class="form-group-sm email required">
-                            <label for="secret">Validation Key </label>
-                            <span class="text-muted float-right mt-2"> (sent to your email)</span>
-                            <input class="form-control form-control-sm" type="text" name="validationKey"
-                                required="required" aria-required="true" autocomplete="emply" maxlength="6">
+                            <label for="secret">verification code </label>
+                            <span class="text-muted float-end mt-2"> (sent to your email)</span>
+                            <input class="form-control form-control-sm" type="text" name="verification_code"
+                                required="required" aria-required="true" autocomplete="empty" maxlength="32">
                         </div>
                         <div class="form-group-sm email required">
                             <label for="password">New Password <span class="text-danger"> *</span></label>
-                            <input class="form-control form-control-sm" type="password" name="newPassword"
-                                required="required" aria-required="true" autocomplete="empty" maxlength="25">
+                            <input class="form-control form-control-sm" type="password" name="password"
+                                required="required" aria-required="true" autocomplete="empty" minlength="8" maxlength="32">
                         </div>
                         <div class="form-group-sm password required">
                             <label for="password">Retype Password <span class="text-danger"> *</span></label>
-                            <input class="form-control form-control-sm" type="password" name="newRepassword"
-                                required="required" aria-required="true" autocomplete="empty" maxlength="25">
+                            <input class="form-control form-control-sm" type="password" name="password_confirm"
+                                required="required" aria-required="true" autocomplete="empty" minlength="8" maxlength="32">
                         </div>
 
                     </div>
                     <div class="col-md-3"> </div>
-                    <div class="col md-12">
-                        <div id="BEstatus" class="pt-2"></div>
-                    </div>
                 </div>
                 <div class="modal-footer">
-                    <input type="hidden" name="resetPassword">
-                    <button type="button" class="btn btn-secondary cancel login-dialog-tab-control"
-                        data-tab="LOGIN">Cancel</button>
+                    <button type="button" class="btn btn-secondary cancel" data-form-switch="LOGIN">Cancel</button>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
             </form>

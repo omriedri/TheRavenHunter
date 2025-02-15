@@ -85,4 +85,18 @@ export class AuthService {
         const response = await Utilities.sendFetch('auth/get-verify-email', 'POST', { email });
         return response;
     }
+
+    /**
+     * Reset the password using the verification code
+     * 
+     * @param {string} email 
+     * @param {string} password 
+     * @param {string} code 
+     * @returns {Promise<BaseResponse>}
+     */
+    static async resetPassword(email, password, password_confirm, verification_code) {
+        const data = { email, password, password_confirm, verification_code };
+        const response = await Utilities.sendFetch('auth/reset-password', 'POST', data);
+        return response;
+    }
 }

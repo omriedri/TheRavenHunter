@@ -94,7 +94,7 @@ class AuthController extends BaseController {
     }
 
     /**
-     * Send verification email (validation key)
+     * Send verification email (verification code)
      * @return void
      */
     public static function sendVerifyEmail(): void {
@@ -112,14 +112,36 @@ class AuthController extends BaseController {
     }
 
     /**
+     * Reset user password (using verification code)
+     * @return void
+     */
+    public static function verifyResetPassword(): void {
+        $Response = new BaseResponse();
+        try {
+            $data = self::getReadyData(User::RESET_PASSWORD_RULES);
+            $VerifiedResponse = AuthService::verifyEmail($data['verification_code']);
+            if(!$VerifiedResponse->status) {
+                throw new \Exception($VerifiedResponse->message, 400);
+            }
+            $ResetResponse = AuthService::resetPassword($data['email'], $data['password']);
+            $ResetResponse->status ? 
+                $Response->setMessage($ResetResponse->message) :
+                $Response->setError($ResetResponse->message, 400);
+        } catch (\Throwable $e) {
+            $Response->handleException($e);
+        }
+        self::output($Response);
+    }
+
+    /**
      * Verify user email
      * @return void
      */
     public static function verifyEmail() {
         $Response = new BaseResponse();
         try {
-            $data = self::getReadyData(['validationKey' => 'required|string|size:32']);
-            $VerifyResponse = AuthService::verifyEmail($data['validationKey']);
+            $data = self::getReadyData(['verification_code' => 'required|string|size:32']);
+            $VerifyResponse = AuthService::verifyEmail($data['verification_code']);
             $VerifyResponse->status ?
                 $Response->setMessage($VerifyResponse->message) :
                 $Response->setError($VerifyResponse->message, 400);
@@ -127,6 +149,5 @@ class AuthController extends BaseController {
             $Response->handleException($e);
         }
         self::output($Response);
-        
     }
 }
