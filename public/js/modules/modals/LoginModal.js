@@ -150,7 +150,7 @@ export default class LoginModal {
             event.preventDefault();
             const formData = Utilities.formDataToRawObject(new FormData(event.target));
             const { password, password_confirm, verification_code: code } = formData;
-            if(password !== confirm_paspassword_confirmsword) {
+            if(password !== password_confirm) {
                 new Notifier('', 'הסיסמאות אינן תואמות', 'danger', 3000);
                 return;
             }
