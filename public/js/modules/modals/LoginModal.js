@@ -139,6 +139,11 @@ export default class LoginModal {
         }
     }
 
+    /**
+     * Reset the password
+     * @param {SubmitEvent} event
+     * @returns {void}
+     */
     async resetPassword(event) {
         try {
             if(!(event instanceof SubmitEvent)) return;
@@ -172,6 +177,7 @@ export default class LoginModal {
         this.form.handler = new FormHandler(this.form);
         this.ELEMENTS.FORMS.LOGIN.addEventListener('submit', (event) => this.login(event));
         this.ELEMENTS.FORMS.FORGOT_PASSWORD.addEventListener('submit', (e) => this.getVerificationCode(e));
+        this.ELEMENTS.FORMS.RESET_PASSWORD.addEventListener('submit', (e) => this.resetPassword(e));
         this.modal._element.addEventListener('show.bs.modal', () => this.#showingPreviewModal());
         this.modal._element.addEventListener('hidden.bs.modal', () => this.#hidingPreviewModal());
         return true;
