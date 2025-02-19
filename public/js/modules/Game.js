@@ -76,12 +76,12 @@ export class Game {
     #setListeners() {
         Game.ELEMENTS.RESTART.addEventListener('click', () => this.restart());
         Game.ELEMENTS.EXIT_BTN.addEventListener('click', () => this.exit());
-        Game.ELEMENTS.CAGE.addEventListener('pointerdown', (e) => this.#shot(e));
-        Game.ELEMENTS.CAGE.addEventListener('pointerdown', (e) => this.#hitBird(e));
-        // Game.ELEMENTS.CAGE.addEventListener('mousedown', (e) => this.#shot(e));
-        // Game.ELEMENTS.BIRD.addEventListener('mousedown', (e) => this.#hitBird(e));
-        // Game.ELEMENTS.BIRD.addEventListener('touchstart', (e) => this.#shot(e));
-        // Game.ELEMENTS.BIRD.addEventListener('touchstart', (e) => this.#hitBird(e));
+        // Game.ELEMENTS.CAGE.addEventListener('pointerdown', (e) => this.#shot(e));
+        // Game.ELEMENTS.CAGE.addEventListener('pointerdown', (e) => this.#hitBird(e));
+        Game.ELEMENTS.CAGE.addEventListener('mousedown', (e) => this.#shot(e));
+        Game.ELEMENTS.BIRD.addEventListener('mousedown', (e) => this.#hitBird(e));
+        Game.ELEMENTS.BIRD.addEventListener('touchend', (e) => this.#shot(e));
+        Game.ELEMENTS.BIRD.addEventListener('touchend', (e) => this.#hitBird(e));
         GameEndingModal.ELEMENTS.BTN_EXIT.addEventListener('click', () => this.exit());
         GameEndingModal.ELEMENTS.BTN_TRY_AGAIN.addEventListener('click', () => this.restart());
         GameOverModal.ELEMENTS.BTN_EXIT.addEventListener('click', () => this.exit());
