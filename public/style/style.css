@@ -310,8 +310,8 @@ game.active {
 game #cage {
     min-width: 200px;
     min-height: 120px;
-    /* cursor: grab; */
     margin: 0px auto;
+    touch-action: none;
     transition: all 0.2s linear;
     animation-name: fadeInOpacity;
     animation-duration: .15s;
@@ -611,6 +611,7 @@ appearance img {
     game #bird {
         height: 60px;
         width: 60px;
+        touch-action: none;
     }
 
     game #game-control-btns {
