@@ -15,7 +15,7 @@ class User extends \Aternos\Model\GenericModel {
     public string $last_name;
     public string $gender;
     public string $email;
-    public string $password;
+    public ?string $password;
     public ?string $phone;
     public ?string $image;
     public ?string $csrf;

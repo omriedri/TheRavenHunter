@@ -33,7 +33,7 @@ export default class LoginModal {
      * Navigate between forms on the login modal
      */
     #modalFormsNavigation() {
-        this.modal._element.querySelectorAll('[data-form-switch]').forEach(btn => { 
+        this.modal._element.querySelectorAll('[data-form-switch]').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 const formName = e.target.getAttribute('data-form-switch').toUpperCase() ?? 'LOGIN';
                 this.switchForm(this.ELEMENTS.FORMS[formName]);
@@ -86,17 +86,17 @@ export default class LoginModal {
             event.preventDefault();
             event.stopPropagation();
             event.submitter.disabled = true
-            if(!FormHandler.checkFormValidity(this.form)) {
+            if (!FormHandler.checkFormValidity(this.form)) {
                 event.submitter.disabled = false;
                 new Notifier('', 'אנא מלא את כל השדות המודגשים בצורה תקינה', 'danger', 3000);
                 return;
             }
 
             // new Notifier('', 'Logging in...', 'info', 1500);
-            const {email, password} = Utilities.formDataToRawObject(new FormData(this.form))
+            const { email, password } = Utilities.formDataToRawObject(new FormData(this.form))
             const response = await AuthService.login(email, password);
 
-            if(!response.authenticated) {
+            if (!response.authenticated) {
                 new Notifier('', response.message, 'danger', 3000);
                 event.submitter.disabled = false;
                 return;
@@ -120,7 +120,7 @@ export default class LoginModal {
      */
     async getVerificationCode(event) {
         try {
-            if(!(event instanceof SubmitEvent)) return;
+            if (!(event instanceof SubmitEvent)) return;
             event.preventDefault();
             const email = event.target.querySelector('input[name="email"]').value;
             if (!email || !(/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))) {
@@ -128,7 +128,7 @@ export default class LoginModal {
                 return;
             }
             const response = await AuthService.getVerificationCode(email);
-            if(!response.success) {
+            if (!response.success) {
                 new Notifier('', response.message, 'danger', 3000);
                 return;
             }
@@ -146,17 +146,17 @@ export default class LoginModal {
      */
     async resetPassword(event) {
         try {
-            if(!(event instanceof SubmitEvent)) return;
+            if (!(event instanceof SubmitEvent)) return;
             event.preventDefault();
             const formData = Utilities.formDataToRawObject(new FormData(event.target));
             const { password, password_confirm, verification_code: code } = formData;
-            if(password !== password_confirm) {
+            if (password !== password_confirm) {
                 new Notifier('', 'הסיסמאות אינן תואמות', 'danger', 3000);
                 return;
             }
             const email = this.ELEMENTS.FORMS.FORGOT_PASSWORD?.querySelector('[name=email]')?.value ?? '';
             const response = await AuthService.resetPassword(email, password, password_confirm, code);
-            if(!response.success) {
+            if (!response.success) {
                 new Notifier('', response.message, 'danger', 3000);
                 return;
             }
@@ -166,12 +166,54 @@ export default class LoginModal {
             new Notifier('', error?.message ?? error, 'danger', 3000);
         }
     }
-    
+
+    /**
+     * Initialize the Google Sign-In button
+     * This function uses the Google Identity Services library to render a sign-in button
+     * 
+     * @returns {void}
+     */
+    #initGoogleSignInButton() {
+        window.google.accounts.id.initialize({
+            client_id: window.GOOGLE_CLIENT_ID ?? '',
+            callback: this.handleGoogleCredentialResponse,
+        });
+        window.google?.accounts.id.renderButton(
+            document.getElementById("googleSignInBtn"),
+            { theme: "outline", size: "large" }
+        );
+    }
+
+    /**
+     * Handle the Google credential response
+     * @param {Object} response
+     * @returns {Promise<void>}
+     */
+    handleGoogleCredentialResponse = async (response) => {
+        try {
+            const id_token = response.credential;
+            const Response = await Utilities.sendFetch('/auth/login-by-google', 'POST', { id_token });
+            if (!Response.success) {
+                new Notifier('', Response.message, 'danger', 3000);
+                return;
+            }
+
+            this.modal.hide();
+            const User = Response.data ?? {};
+            Home.setUserWelcome(User?.fname, User?.image);
+            Home.switchVisibilityByUserState(true);
+            MainInstance.SettingsInstance.init();
+        } catch (err) {
+            new Notifier('', err.message, 'danger', 3000);
+        }
+    };
+
     /**
      * @returns {boolean}
      */
     initEvents() {
         this.#modalFormsNavigation();
+        this.#initGoogleSignInButton();
         this.form.handler = new FormHandler(this.form);
         this.ELEMENTS.FORMS.LOGIN.addEventListener('submit', (event) => this.login(event));
         this.ELEMENTS.FORMS.FORGOT_PASSWORD.addEventListener('submit', (e) => this.getVerificationCode(e));

@@ -10,6 +10,7 @@ Router::get('/contact', 'Views/contact.php');
 
 Router::get('/auth/check', fn() => AuthController::check());
 Router::post('/auth/login', fn() => AuthController::login());
+Router::post('/auth/login-by-google', fn() => AuthController::loginWithGoogle());
 Router::post('/auth/logout', fn() => AuthController::logout());
 Router::post('/auth/register', fn() => AuthController::register());
 Router::post('/auth/verify-email', fn() => AuthController::verifyEmail());

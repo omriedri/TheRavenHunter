@@ -11,6 +11,11 @@ require_once __DIR__ . '/../Enums/HttpStatus.php';
 require_once __DIR__ . '/../Responses/BaseResponse.php';
 require_once __DIR__ . '/../Responses/SimpleResponse.php';
 require_once __DIR__ . '/../Responses/SimpleResponseData.php';
+require_once __DIR__ . '/../Exceptions/DataValidationException.php';
+
+use Google\Client;
+use Google\Service\ServiceControl\Auth;
+
 
 class AuthService {
 
@@ -22,20 +27,64 @@ class AuthService {
      */
     public static function login(string $email, string $password): SimpleResponseData {
         $Response = new SimpleResponseData();
+        if(self::check()) {
+            throw new \Exception('Already logged in', 400);
+        }
         $User = User::select([
             'email' => $email, 
             'password' => self::generatePassword($password)
         ])[0] ?? null;
         if ($User instanceof User) {
-            $User->csrf = self::generateCsrf();
-            $User->last_login = date('Y-m-d H:i:s');
-            $User->save();
+            $User = self::saveLastLogin($User);
             self::setUserSession($User);
             $Response->setSuccess('You have logged in successfully');
             $Response->data = $User->getUserInfo();
         } else {
             $Response->setError('Invalid email or password', HttpStatus::UNAUTHORIZED);
         }
+        return $Response;
+    }
+
+    /**
+     * Login with Google OAuth
+     * @param string $idToken
+     * @return SimpleResponseData
+     * @throws \Exception
+     */
+    public static function loginWithGoogle($idToken) {
+        $Response = new SimpleResponseData();
+        if(self::check()) {
+            throw new \Exception('Already logged in', 400);
+        }
+        if (!$idToken || !is_string($idToken) || trim($idToken) === '') {
+            throw new \DataValidationException('ID token is required', 400);
+        }
+        $GOOGLE_CLIENT_ID = $_ENV['GOOGLE_CLIENT_ID'] ?? null;
+        if (!$GOOGLE_CLIENT_ID) {
+            throw new \Exception('Google Client ID is not configured', 500);
+        }
+        $client = new Google_Client(['client_id' => $GOOGLE_CLIENT_ID]);
+        $payload = $client->verifyIdToken($idToken);
+        if (!$payload) {
+            throw new \Exception('Invalid ID token', 401);
+        }
+        $email = $payload['email'];
+        $User = self::getUserByEmail($email);
+        if (!$User) {
+            $User = new User();
+            $User->first_name = $payload['given_name'];
+            $User->last_name = $payload['family_name'];
+            $User->email = $email;
+            $User->password = null; // no password needed
+            $User->image = $payload['picture'] ?? null;
+            $User->created_at = date('Y-m-d H:i:s');
+            $User->updated_at = date('Y-m-d H:i:s');
+            $User->save();
+        }
+        $User = self::saveLastLogin($User);
+        self::setUserSession($User);
+        $Response->setSuccess('You have logged in successfully with Google');
+        $Response->data = $User->getUserInfo();
         return $Response;
     }
 
@@ -267,6 +316,32 @@ class AuthService {
      */
     public static function setUserSession(User $User): bool {
         return (bool) $_SESSION['User'] = serialize($User);
+    }
+
+    /**
+     * Save last login time and CSRF token
+     * @param User $User
+     * @return User
+     */
+    private static function saveLastLogin(User $User): User {
+        $User->last_login = date('Y-m-d H:i:s');
+        $User->csrf = self::generateCsrf();
+        $User->save();
+        return $User;
+    }
+
+    /**
+     * Get user by email
+     * @param string $email
+     * @return User|null
+     */
+    public static function getUserByEmail($email): ?User {
+        if(empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            return null;
+        }
+        $User = User::select(['email' => $email], null, null, new Limit(1))[0] ?? null;
+        return $User instanceof User ? $User : null;
+        
     }
 
     /**

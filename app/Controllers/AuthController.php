@@ -30,6 +30,26 @@ class AuthController extends BaseController {
     }
 
     /**
+     * Login with Google OAuth
+     * @return void
+     */
+    public static function loginWithGoogle() {
+        $Response = new DataResponse();
+        try {
+            $data = self::getReadyData(['id_token' => 'required|min:1|max:2048']);
+            $AuthResponse = AuthService::loginWithGoogle($data['id_token']);
+            if(!$AuthResponse->status) {
+                throw new \Exception($AuthResponse->message, 400);
+            }
+            $Response->setMessage($AuthResponse->message);
+            $Response->setData($AuthResponse->data);
+        } catch (\Throwable $e) {
+            $Response->handleException($e);
+        }
+        self::output($Response);
+    }
+
+    /**
      * Logout user (destroy session)
      * @return void
      */

@@ -23,4 +23,5 @@
     <meta name="twitter:title" content="The Bird Catcher">
     <meta name="twitter:description" content="Comupter web game, fun and joy!">
     <meta name="twitter:image" content="//omriedri.co.il/projects/TheBirdCatcher/images/icon.png">
+    <script src="https://accounts.google.com/gsi/client?hl=en" async defer></script>
 </head>

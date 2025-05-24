@@ -38,9 +38,9 @@
                 </div>
                 <div class="modal-footer">
                     <input type="hidden" name="loginData">
-                    <button type="button" class="btn btn-secondary cancel d-mv-none"
-                        data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-secondary cancel d-mv-none" data-bs-dismiss="modal">Cancel</button>
                     <button type="submit" class="btn btn-primary">Log-In</button>
+                    <div id="googleSignInBtn" class="g_id_signin"></div>
                 </div>
             </form>
             <form id="forgetPasswordForm" name="forgetPassword">
@@ -55,7 +55,7 @@
                             <input class="form-control form-control-sm" type="email" name="email"
                                 required="required" aria-required="true" maxlength="50">
                         </div>
-                        
+
                     </div>
                     <div class="col-12 mt-2">
                         <p>We will send you an email with a verification code to reset your password.</p>
