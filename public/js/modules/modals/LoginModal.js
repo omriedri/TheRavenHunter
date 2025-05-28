@@ -199,7 +199,7 @@ export default class LoginModal {
             }
 
             this.modal.hide();
-            const User = Response.data ?? {};
+            const User = MainInstance.LoggedUser = Response.data ?? {};
             Home.setUserWelcome(User?.fname, User?.image);
             Home.switchVisibilityByUserState(true);
             MainInstance.SettingsInstance.init();

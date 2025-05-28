@@ -11,7 +11,7 @@
     <div class="wrapper">
         <div class="recordsHeader">
             <table class="table">
-                <thead class="thead-dark">
+                <thead class="table-dark">
                     <th class="left member" scope="col">Player</th>
                     <th class="middle hour" scope="col">Hour</th>
                     <th class="middle date" scope="col">Date</th>

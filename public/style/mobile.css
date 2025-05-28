@@ -61,11 +61,11 @@
 }
 
 .mobile-view .nav-container.hide {
-    left: -300px;
+    left: -300px !important;
 }
 
 .mobile-view .nav-container.show {
-    left: 0px;
+    left: 0px !important;
 }
 
 .mobile-view profile {
@@ -85,17 +85,11 @@
 /* home */
 
 .mobile-view home button#start {
-    display: block;
     width: auto;
     height: auto;
-    font-size: 32px;
     margin-top: 1em;
-    padding: 5px 20px;
+    padding: 0.5rem 5rem;
     filter: drop-shadow(2px 4px 6px black);
-}
-
-.mobile-view home #bird {
-    max-height: 250px;
 }
 
 /* game */

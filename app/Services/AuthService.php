@@ -38,7 +38,7 @@ class AuthService {
             $User = self::saveLastLogin($User);
             self::setUserSession($User);
             $Response->setSuccess('You have logged in successfully');
-            $Response->data = $User->getUserInfo();
+            $Response->setData($User->getUserInfo());
         } else {
             $Response->setError('Invalid email or password', HttpStatus::UNAUTHORIZED);
         }
@@ -83,8 +83,8 @@ class AuthService {
         }
         $User = self::saveLastLogin($User);
         self::setUserSession($User);
-        $Response->setSuccess('You have logged in successfully with Google');
-        $Response->data = $User->getUserInfo();
+        $Response->setSuccess('You have logged in successfully');
+        $Response->setData($User->getUserInfo());
         return $Response;
     }
 

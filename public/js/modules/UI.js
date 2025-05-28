@@ -8,6 +8,7 @@ export class UserInterface {
     static ELEMENTS = {
         logo : document.querySelector('header .cover'),
         nav: document.querySelector('nav'),
+        navbar: document.querySelector('nav .nav-container'),
         profile: document.querySelector('profile'),
         pages: document.querySelectorAll('.page'),
         logout_btns: document.querySelectorAll('[data-action="logout"]')
@@ -38,9 +39,19 @@ export class UserInterface {
     }
 
     init() {
+        this.#setBodyView();
         this.#menuNavigation();
+        this.#hidNavbarOnClick();
         this.#implementLogoutButtons();
-    Records.ELEMENTS.select.addEventListener('change', () => Records.print());
+        Records.ELEMENTS.select.addEventListener('change', () => Records.print());
+        this.initEvents();
+    }
+
+    /**
+     * Initialize events for the user interface
+     */
+    initEvents() {
+        window.addEventListener('resize', () => this.#setBodyView());
     }
 
     /**
@@ -98,6 +109,23 @@ export class UserInterface {
         });
     }
 
+    /**
+     * Hide the navbar when a menu item is clicked
+     */
+    #hidNavbarOnClick() {
+        if (!this.static.isMobile()) return;
+        this.static.ELEMENTS.nav.querySelectorAll('.menu-item button').forEach(MenuItem => {
+            MenuItem.addEventListener('click', () => {
+                this.static.ELEMENTS.nav.classList.remove('active');
+                this.static.ELEMENTS.navbar.classList.add('hide');
+                setTimeout(() => {
+                    this.static.ELEMENTS.nav.classList.add('active');
+                    this.static.ELEMENTS.navbar.classList.remove('hide');
+                }, 300);
+            }); 
+        });
+    }
+
     #implementLogoutButtons() {
         this.static.ELEMENTS.logout_btns.forEach(item =>
             item?.addEventListener('click', () =>
@@ -138,6 +166,16 @@ export class UserInterface {
             image.src = e.target.result;
         }
         reader.readAsDataURL(file);
+    }
+
+    #setBodyView() {
+        if (this.static.isMobile()) {
+            document.body.classList.add('mobile-view');
+            document.body.classList.remove('desktop-view');
+        } else {
+            document.body.classList.remove('mobile');
+            document.body.classList.add('desktop-view');
+        }
     }
 
 
