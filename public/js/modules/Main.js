@@ -20,6 +20,7 @@ export class Main {
         console.log('Main module initialized');
         this.HomeInstance = new Home();
         this.UIInstance = new UserInterface();
+        this.initServerWorker();
         return this;
     }
 
@@ -53,6 +54,26 @@ export class Main {
      */
     getUI() {
         return this.UIInstance;
+    }
+
+    /**
+     * Initialize the service worker
+     * This method registers a service worker to enable offline capabilities and caching.
+     * 
+     * @returns {void}
+     */
+    initServerWorker() {
+        if ("serviceWorker" in navigator) {
+            window.addEventListener("load", function () {
+                navigator.serviceWorker.register("/service-worker.js")
+                    .then(function (registration) {
+                        console.log("Service Worker registered with scope:", registration.scope);
+                    })
+                    .catch(function (error) {
+                        console.log("Service Worker registration failed:", error);
+                    });
+            });
+        }
     }
 }
 

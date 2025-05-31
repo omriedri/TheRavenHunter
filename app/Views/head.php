@@ -15,13 +15,37 @@
     <link rel="stylesheet" href="public/style/Notifier.css">
     <link rel="icon" href="public/images/favicon.ico" type="image/x-icon">
     <link rel="shortcut icon" href="public/images/favicon.ico" type="image/x-icon">
-    <meta property="og:title" content="The Bird Catcher">
-    <meta property="og:description" content="Comupter web game, fun and joy!">
-    <meta property="og:image" content="TheBirdCatcher.omriedri.co.il/public/images/icon.png">
-    <meta property="og:url" content="//TheBirdCatcher.omriedri.co.il">
+
+    <!-- Manifest -->
+    <link rel="manifest" href="/manifest.json">
+
+    <!-- Theme color for status bar -->
+    <meta name="theme-color" content="#ffe4c4">
+
+    <!-- Add to home screen support for iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="The Raven Hunter">
+    <link rel="apple-touch-icon" href="icons/icon-192.png">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:title" content="The Raven Hunter">
+    <meta property="og:description" content="Shoot and capture birds with The Raven Hunter.">
+    <meta property="og:image" content="https://ravenhunter.omriedri.co.il/public/images/og-image.jpg">
+    <meta property="og:url" content="https://ravenhunter.omriedri.co.il/">
+    <meta property="og:type" content="website">
+
+    <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="The Bird Catcher">
-    <meta name="twitter:description" content="Comupter web game, fun and joy!">
-    <meta name="twitter:image" content="//omriedri.co.il/projects/TheBirdCatcher/images/icon.png">
+    <meta name="twitter:title" content="The Raven Hunter">
+    <meta name="twitter:description" content="Shoot and capture birds with The Raven Hunter.">
+    <meta name="twitter:image" content="https://ravenhunter.omriedri.co.il/public/images/og-image.jpg">
+
+    <!-- WhatsApp uses Open Graph tags -->
+    <meta name="msapplication-TileColor" content="#ffe4c4">
+    <meta name="msapplication-TileImage" content="/public/images/manifest/icon-192.png">
+    <meta name="msapplication-config" content="browserconfig.xml">
+
+
     <script src="https://accounts.google.com/gsi/client?hl=en" async defer></script>
 </head>
