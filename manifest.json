@@ -1,10 +1,10 @@
 {
     "name": "The Raven Hunter",
     "short_name": "Ravens Hunter",
-    "start_url": "/index.php",
+    "start_url": "/",
     "display": "standalone",
-    "background_color": "#ffe4c4",
-    "theme_color": "#ffe4c4",
+    "background_color": "#000",
+    "theme_color": "#000",
     "orientation": "portrait",
     "description": "A web game where you hunt ravens in a mystical forest.",
     "icons": [
