@@ -217,12 +217,6 @@
     max-width: 320px;
 }
 
-.mobile-view #profilePreview .row.img img {
-    float: none !important;
-    display: block;
-    margin: 0 auto;
-}
-
 .mobile-view #profilePreview.isOther .row.email {
     display: none;
 }

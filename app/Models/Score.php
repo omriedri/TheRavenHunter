@@ -140,8 +140,16 @@ class Score extends \Aternos\Model\GenericModel {
         return self::getPlatforms()[$this->platform] ?? '';
     }
 
+    public function getPlatformIcon() {
+        return "/public/images/platform/" . $this->getPlatform() . ".png";
+    }
+
     public function getDifficulty() {
         return self::getDifficulties()[$this->difficulty] ?? '';
+    }
+
+    public function getDifficultyIcon() {
+        return "/public/images/difficulty/" . $this->getDifficulty() . ".png";
     }
 
     /**

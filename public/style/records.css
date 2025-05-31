@@ -19,59 +19,12 @@ records .wrapper {
     filter: drop-shadow(0px 2px 6px black);
 }
 
-records .recordsHeader table {
-    margin: 0;
-}
-
-records .recordsHeader table th {
-    width: 14%;
-}
-
-records .recordsHeader table th.middle, records .recordsHeader table th.right {
-    text-align: center;
-}
-
 records .recordsContainer {
+    height: 65vh;
     overflow: auto;
-    min-height: 60vh;
-    max-height: 60vh;
     background-color: whitesmoke;
 }
 
-records .recordsContainer .table {
-    margin-bottom: 0;
-    background-color: whitesmoke;
-}
-
-records .recordsContainer .table tr {
-    background-color: whitesmoke;
-    transition: all 0.25s linear;
-}
-
-records .recordsContainer .table .you {
+records .recordsContainer .you {
     background-color: antiquewhite;
-}
-
-records .recordsContainer .table .member {
-    padding: 0 0.75rem;
-}
-
-records .recordsContainer .table .member button {
-    margin-left: -12px;
-    margin-right: 12px;
-    border: none;
-    padding: 0;
-}
-
-records .recordsContainer .table .member img {
-    height: 50px;
-    width: 50px;
-}
-
-records .recordsContainer .table td {
-    width: 14%;
-}
-
-records .recordsContainer .table td.middle, records .recordsContainer .table td.right {
-    text-align: center;
 }

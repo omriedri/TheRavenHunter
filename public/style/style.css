@@ -485,15 +485,6 @@ game #life #life-bar .progress-bar {
     filter: contrast(1.25);
 }
 
-.modal #profilePreview .img {
-    background: none;
-}
-
-.modal #profilePreview .img img {
-    min-height: 200px;
-    max-height: 200px;
-}
-
 
 
 /* ---- Profile-Preview modal ----- */
@@ -576,6 +567,12 @@ appearance img {
     outline: none !important;
 }
 
+modals #profilePreview .img {
+    max-height: 250px;
+    background-size: cover;
+    background-position: center;
+}
+
 @media only screen and (max-width: 1300px) {
     game #life {
         top: unset;
@@ -587,7 +584,7 @@ appearance img {
 }
 
 
-@media only screen and (max-width: 760px) {
+@media only screen and (max-width: 768px) {
 
     header .cover {
         height: 200px;
@@ -637,14 +634,14 @@ appearance img {
         width: 80%;
     }
 
-    modals #profilePreview .img {
-        height: 250px;
-        background-size: cover;
-        background-position: center;
-    }
-
     
     modals #profilePreview .img .col {
         display: none   ;
     }
+
+    modals #profilePreview .img {
+        min-height: 40vh;
+        max-height: 40vh;
+    }
+
 }

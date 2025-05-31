@@ -1,6 +1,6 @@
 <!-- Profile -->
 <div class="modal fade" id="profileModal" tabindex="-1" role="dialog" aria-labelledby="profile" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+    <div class="modal-dialog modal-md modal-dialog-centered" role="document">
         <div class="modal-content">
             <form id="profilePreview" class="active" data-tab="preview" name="profileViewForm"
                 enctype="multipart/form-data">
@@ -9,67 +9,67 @@
                     <h5 class="modal-title" id="RegistrationModalLongTitleOther">Member Profile</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body row text-left">
-                    <div class="col-6 col-md-4">
+                <div class="modal-body py-0 row text-left">
+                    <div class="col-6 col-md-4 pt-2">
                         <div class="user-info-col row full-name w-mv-49 d-mv-inline-block m-mv-0">
                             <div class="col">
                                 <h6>Name:</h6>
-                                <p class="loader"></p>
-                                <p class="details ml-2"></p>
+                                <p class="loader m-0"></p>
+                                <p class="details mb-2"></p>
                             </div>
                         </div>
-                        <div class="user-info-col row gender w-mv-49 d-mv-inline-block m-mv-0">
+                        <div class="user-info-col row gender w-mv-49 d-mv-inline-block m-mv-0 d-none">
                             <div class="col">
                                 <h6>Gender:</h6>
-                                <p class="loader"></p>
-                                <p class="details ml-2"></p>
+                                <p class="loader m-0"></p>
+                                <p class="details mb-2"></p>
                             </div>
                         </div>
 
                         <div class="user-info-col row email m-mv-0">
                             <div class="col">
                                 <h6>Email:</h6>
-                                <p class="loader"></p>
-                                <p class="details ml-2">
+                                <p class="loader m-0"></p>
+                                <p class="details mb-2">
                                     <span class="text"></span>
                                 </p>
                             </div>
                         </div>
                     </div>
-                    <div class="col-6 col-md-3">
+                    <div class="col-6 col-md-3 pt-2">
                         <div class="user-info-col row rank w-mv-49 d-mv-inline-block m-mv-0">
                             <div class="col">
                                 <h6>Rank:</h6>
-                                <p class="loader"></p>
-                                <p class="details ml-2">
+                                <p class="loader m-0"></p>
+                                <p class="details mb-2">
                                     <span>#</span><span class="text"></span>
                                 </p>
                             </div>
                         </div>
                         <div class="user-info-col row score w-mv-49 d-mv-inline-block m-mv-0">
                             <div class="col">
-                                <h6>Best score:</h6>
-                                <p class="loader"></p>
-                                <p class="details ml-2">
+                                <h6>Best:</h6>
+                                <p class="loader m-0"></p>
+                                <p class="details mb-2">
                                     <span class="text"></span>
                                 </p>
                             </div>
                         </div>
                         <div class="user-info-col row registred m-mv-0">
                             <div class="col">
-                                <h6>Registered at:</h6>
-                                <p class="loader"></p>
-                                <p class="details ml-2">
+                                <h6>Since:</h6>
+                                <p class="loader m-0"></p>
+                                <p class="details mb-2">
                                     <span class="text"></span>
                                 </p>
                             </div>
                         </div>
 
                     </div>
-                    <div class="col-md-5">
-                        <div class="row img d-block">
-                            <div class="col text-center text-md-end">
-                                <img src="<?= PathHelper::image('avatar-male.jpg') ?>" alt="Profile">
+                    <div class="col">
+                        <div class="row img d-block" style="background-image: url('/public/images/transparent.png')">
+                            <div class="col text-center text-end">
+                                <img class="w-100" src="/public/images/transparent.png" alt="Profile">
                             </div>
                         </div>
                     </div>

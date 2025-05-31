@@ -10,41 +10,33 @@
 
     <div class="wrapper">
         <div class="recordsHeader">
-            <table class="table">
-                <thead class="table-dark">
-                    <th class="left member" scope="col">Player</th>
-                    <th class="middle hour" scope="col">Hour</th>
-                    <th class="middle date" scope="col">Date</th>
-                    <th class="middle plat" scope="col">Platform</th>
-                    <th class="middle diff" scope="col">Difficulty</th>
-                    <th class="middle time" scope="col">Time</th>
-                    <th class="right score" scope="col">Score</th>
-                </thead>
-            </table>
+            <div class="d-flex bg-dark text-white text-center fw-bold w-100">
+                <div class="col-5 col-md-3 text-start ms-1">Player</div>
+                <div class="col-3 d-none d-md-flex">Performd at</div>
+                <div class="col-2 col-sm-1">Time</div>
+                <div class="col">Score</div>
+                <div class="col-2 col-md-1"></div>
+            </div>
         </div>
         <div class="recordsContainer">
-            <table class="table">
-                <tbody id="records">
-
-                    <div id="recordsLoading" class="loadingio-spinner-spinner-t4i2yjwkfx active">
-                        <div class="ldio-bsei7j58pwk">
-                            <div></div>
-                            <div></div>
-                            <div></div>
-                            <div></div>
-                            <div></div>
-                            <div></div>
-                            <div></div>
-                            <div></div>
-                            <div></div>
-                            <div></div>
-                            <div></div>
-                            <div></div>
-                        </div>
+            <div id="recordsList" class="recordsList">
+                <div id="recordsLoading" class="loadingio-spinner-spinner-t4i2yjwkfx active">
+                    <div class="ldio-bsei7j58pwk">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
                     </div>
-
-                </tbody>
-            </table>
+                </div>
+            </div>
         </div>
     </div>
 </records>

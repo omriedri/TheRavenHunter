@@ -24,6 +24,7 @@ class ScoresController extends BaseController {
 
     public static function get(int $option = self::GET__TOP_15) {
         $Response = new DataResponse();
+        $Users = [];
         try {
             switch ($option) {
                 case self::GET__TOP_15:
@@ -46,19 +47,29 @@ class ScoresController extends BaseController {
             }
             $data = [];
             foreach ($scores as $Score) {
-                $User = User::get($Score->user_id);
+                $User = $Users[$Score->user_id] = $Users[$Score->user_id] ?? User::get($Score->user_id);
+                $userFullName = $User->first_name . ' ' . $User->last_name;
+                $shortName = strlen($userFullName) > 15 ? substr($userFullName, 0, 12) . '...' : $userFullName;
                 $data[] = [
                     'player' => [
                         'id' => $User->id,
-                        'name' => $User->first_name . ' ' . $User->last_name,
+                        'name' => $shortName,
                         'image' => $User->getImage(),
                     ],
-                    'hour' => date('H:i', strtotime($Score->created_at)),
-                    'date' => date('d/m/Y', strtotime($Score->created_at)),
-                    'platform' => $Score->getPlatform(),
-                    'difficulty' => $Score->getDifficulty(),
                     'score' => number_format($Score->score),
-                    'time' => $Score->time,
+                    'time' => date('i:s', strtotime($Score->time)),
+                    'hour' => date('H:i', strtotime($Score->created_at)),
+                    'date' => date('d/m/y', strtotime($Score->created_at)),
+                    'platform' => [
+                        'id' => $Score->platform,
+                        'name' => $Score->getPlatform(),
+                        'icon' => $Score->getPlatformIcon(),
+                    ],
+                    'difficulty' => [
+                        'id' => $Score->difficulty,
+                        'name' => $Score->getDifficulty(),
+                        'icon' => $Score->getDifficultyIcon(),
+                    ],
                 ];
             }
             $Response->setData($data)->setSuccess('Scores fetched successfully');

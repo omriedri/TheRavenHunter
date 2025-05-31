@@ -43,7 +43,6 @@ export default class ProfileModal {
         this.details.querySelector('.rank p.details').innerHTML = !rank?.rank ? 'Unknown' : rank.rank;
         this.details.querySelector('.score p.details').innerHTML = rank?.score;
         this.details.querySelector('.registred p.details').innerHTML = user.since;
-        this.details.querySelector('img').src = user?.image ?? 'public/images/user.png';
         this.details.querySelector('img').alt = `${user.fname} ${user.lname}`;
         this.details.querySelector('.img').style.backgroundImage = `url(${user?.image ?? 'public/images/user.png'})`;
 

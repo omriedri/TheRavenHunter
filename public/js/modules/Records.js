@@ -6,7 +6,7 @@ export class Records {
 
     static ELEMENTS = {
         select: document.querySelector('records select'),
-        records: document.querySelector('records tbody'),
+        records: document.querySelector('records #recordsList'),
         loader: document.querySelector('records #recordsLoading')
     }
 
@@ -37,20 +37,25 @@ export class Records {
             records.forEach((record, i) => {
                 const you = record?.player.id == MainInstance.LoggedUser?.id ? 'you' : '';
                 this.ELEMENTS.records.innerHTML += `
-                    <tr class="d-flex justify-content-between align-items-center w-100 ${you}" scope="row">
-                        <td class="text-start member">
-                            <button data-bs-toggle="modal" data-bs-target="#profileModal" player="${record?.player.id}">
-                                <img src="${record?.player.image}" alt="${record?.player.name}" class="avatar">
+                    <div class="d-flex justify-content-between align-items-center w-100 ${you}">
+                        <div class="col-5 col-md-3 text-start member">
+                            <button class="btn p-0" data-bs-toggle="modal" data-bs-target="#profileModal" player="${record?.player.id}">
+                                <img src="${record?.player.image}" alt="${record?.player.name}" class="avatar" with="40" height="40">
                             </button>
                             <span class="name">${record?.player.name}</span>
-                        </td>
-                        <td class="text-center hour">${record?.hour}</td>
-                        <td class="text-center date">${record?.date}</td>
-                        <td class="text-center plat">${record?.platform}</td>
-                        <td class="text-center diff">${record?.difficulty}</td>
-                        <td class="text-center time">${record?.time}</td>
-                        <td class="text-center score">${record?.score}</td>
-                    </tr>
+                        </div>
+                        <div class="col-3 text-center hour d-none d-md-flex">${record?.date} - ${record?.hour}</div>
+                        <div class="col-2 col-sm-1 text-center time">${record?.time}</div>
+                        <div class="col   text-center score">${record?.score}</div>
+                        <div class="col-2 col-md-1 d-flex justify-content-end align-items-center">
+                            <div class="col text-center plat mx-1">
+                                <img src="${record?.platform?.icon}" alt="${record?.platform?.name}" width="30">
+                            </div>
+                            <div class="col text-center diff mx-1">
+                                <img src="${record?.difficulty?.icon}" alt="${record?.difficulty?.name}" width="25">
+                            </div>
+                        </div>
+                    </div>
                 `;
             });
         }
