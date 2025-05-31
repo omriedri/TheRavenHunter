@@ -174,11 +174,11 @@ export default class LoginModal {
      * @returns {void}
      */
     #initGoogleSignInButton() {
-        window.google.accounts.id.initialize({
+        window?.google?.accounts.id.initialize({
             client_id: window.GOOGLE_CLIENT_ID ?? '',
             callback: this.handleGoogleCredentialResponse,
         });
-        window.google?.accounts.id.renderButton(
+        window?.google?.accounts.id.renderButton(
             document.getElementById("googleSignInBtn"),
             { theme: "outline", size: "large" }
         );

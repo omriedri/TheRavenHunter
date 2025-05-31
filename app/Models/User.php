@@ -66,7 +66,7 @@ class User extends \Aternos\Model\GenericModel {
         'email'         => 'required|email',
         'password'      => 'required|min:8|max:32',
         'password_confirm' => 'required|same:password',
-        'verification_code' => 'required|string|size:32',
+        'verification_code' => 'required|size:32',
     ];
 
     public const GENDER_UNKNOWN = 0;
