@@ -4,8 +4,11 @@ import { BaseResponse } from "./responses/BaseResponse.js";
 import { MainInstance } from "./Main.js";
 import { Notifier } from "./Notifier.js";
 import { UserInterface } from "./UI.js";
+import { Home } from "./Home.js";
 
 export class AuthService {
+
+    static static = AuthService;
 
     /**
      * Login the user
@@ -98,5 +101,89 @@ export class AuthService {
         const data = { email, password, password_confirm, verification_code };
         const response = await Utilities.sendFetch('auth/reset-password', 'POST', data);
         return response;
+    }
+
+    /**
+     * Initialize the Google Sign-In button
+     * This function uses the Google Identity Services library to render a sign-in button
+     * 
+     * @param {HTMLElement} element - The HTML element where the Google Sign-In button will be rendered
+     * @returns {void}
+     */
+    static initGoogleSignInButton(element) {
+        if (!window?.google) {
+            console.warn(' The Google Identity Services library is not loaded.');
+            return;
+        }
+        if (!window?.GOOGLE_CLIENT_ID) {
+            console.warn('Google Client ID is not set. Skipping Google Sign-In button initialization.');
+            return;
+        }
+        if(!window.google?.accounts?.id) {
+            console.warn('Google Identity Services is not initialized. Skipping Google Sign-In button initialization.');
+            return;
+        }
+        if (!element || !(element instanceof HTMLElement)) {
+            console.warn('Invalid element provided for Google Sign-In button initialization.');
+            return;
+        }
+        window.google.accounts.id.initialize({
+            client_id: window.GOOGLE_CLIENT_ID ?? '',
+            callback: AuthService.handleGoogleCredentialResponse,
+        });
+        window.google.accounts.id.renderButton(element,{ theme: "outline", size: "large" });
+    }
+
+    /**
+     * Handle the Google credential response
+     * @param {Object} response
+     * @returns {Promise<void>}
+     */
+    static async handleGoogleCredentialResponse (CredentialResponse) {
+        debugger;
+        try {
+            const credential = CredentialResponse?.credential ?? null;
+            const SignInResponse = await AuthService.__loginByGoogleAccount(credential);
+            if (!SignInResponse.success) {
+                new Notifier('', SignInResponse.message, 'danger', 3000);
+                return;
+            }
+
+            window.modals?.login?.modal?.hide()
+            window.modals?.register?.modal?.hide();
+            const User = MainInstance.LoggedUser = SignInResponse.data ?? {};
+            Home.setUserWelcome(User?.fname, User?.image);
+            Home.switchVisibilityByUserState(true);
+            MainInstance.SettingsInstance.init();
+        } catch (err) {
+            new Notifier('', err.message, 'danger', 3000);
+        }
+    };
+
+
+    /**
+     * Handle the Google credential response
+     * @param {string|null} credential
+     * @returns {Promise<AuthResponse>}
+     */
+    static async __loginByGoogleAccount(credential) {
+        const Response = new AuthResponse();
+        try {
+            const id_token = credential ?? null;
+            if (!id_token) {
+                throw new Error('Google Sign-In failed. No credential received.');
+            }
+            const SeverResponse = await Utilities.sendFetch('/auth/login-by-google', 'POST', { id_token });
+            if (!SeverResponse.success) {
+                throw new Error(SeverResponse.message || 'Google Sign-In failed.');
+            }
+            Response.message = SeverResponse?.message ?? 'Successfully logged in with Google';
+            Response.success = !!SeverResponse?.success;
+            Response.data = SeverResponse?.data ?? null;
+            Response.authenticated = !!SeverResponse?.data;
+        } catch (error) {
+            Response.setError(error?.message ?? error);
+        }
+        return Response;
     }
 }

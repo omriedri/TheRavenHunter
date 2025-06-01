@@ -58,7 +58,7 @@
 
                     </div>
                     <div class="col-12 mt-2">
-                        <p>We will send you an email with a verification code to reset your password.</p>
+                        <small>We will send you an email with a verification code to reset your password.</small>
                     </div>
                 </div>
                 <div class="modal-footer">

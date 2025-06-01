@@ -14,6 +14,10 @@ export default class RegisterModal {
         SHOW: new Audio('/public/sounds/modal-show.mp3'),
     }
 
+    ELEMENTS = {
+        GOOGLE_SIGN_IN_BTN: document.getElementById("googleRegisterBtn"),
+    }
+
     constructor() {
         this.initEvents();
     }
@@ -86,6 +90,8 @@ export default class RegisterModal {
         this.form.addEventListener('submit', (event) => this.register(event));
         this.modal._element.addEventListener('show.bs.modal', () => this.#showingPreviewModal());
         this.modal._element.addEventListener('hidden.bs.modal', () => this.#hidingPreviewModal());
+        AuthService.initGoogleSignInButton(this.ELEMENTS.GOOGLE_SIGN_IN_BTN);
+        window.modals.register = this; // Expose the modal instance globally for easy access
         return true;
     }
 }

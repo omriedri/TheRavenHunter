@@ -77,6 +77,7 @@ export class Main {
     }
 }
 
+window.modals = { login: null, register: null, profile: null };
 const MainInstance = Main.init();
 MainInstance.SettingsInstance = new Settings();
 MainInstance.GameInstance = new Game();

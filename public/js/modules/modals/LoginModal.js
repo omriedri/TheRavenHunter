@@ -22,6 +22,7 @@ export default class LoginModal {
             RESET_PASSWORD: document.querySelector('#resetPasswordForm'),
         },
         RESET_PASSWORD_BTN: document.querySelector('#resetPasswordBtn'),
+        GOOGLE_SIGN_IN_BTN: document.getElementById("googleSignInBtn"),
     }
 
 
@@ -168,58 +169,18 @@ export default class LoginModal {
     }
 
     /**
-     * Initialize the Google Sign-In button
-     * This function uses the Google Identity Services library to render a sign-in button
-     * 
-     * @returns {void}
-     */
-    #initGoogleSignInButton() {
-        window?.google?.accounts.id.initialize({
-            client_id: window.GOOGLE_CLIENT_ID ?? '',
-            callback: this.handleGoogleCredentialResponse,
-        });
-        window?.google?.accounts.id.renderButton(
-            document.getElementById("googleSignInBtn"),
-            { theme: "outline", size: "large" }
-        );
-    }
-
-    /**
-     * Handle the Google credential response
-     * @param {Object} response
-     * @returns {Promise<void>}
-     */
-    handleGoogleCredentialResponse = async (response) => {
-        try {
-            const id_token = response.credential;
-            const Response = await Utilities.sendFetch('/auth/login-by-google', 'POST', { id_token });
-            if (!Response.success) {
-                new Notifier('', Response.message, 'danger', 3000);
-                return;
-            }
-
-            this.modal.hide();
-            const User = MainInstance.LoggedUser = Response.data ?? {};
-            Home.setUserWelcome(User?.fname, User?.image);
-            Home.switchVisibilityByUserState(true);
-            MainInstance.SettingsInstance.init();
-        } catch (err) {
-            new Notifier('', err.message, 'danger', 3000);
-        }
-    };
-
-    /**
      * @returns {boolean}
      */
     initEvents() {
         this.#modalFormsNavigation();
-        this.#initGoogleSignInButton();
         this.form.handler = new FormHandler(this.form);
         this.ELEMENTS.FORMS.LOGIN.addEventListener('submit', (event) => this.login(event));
         this.ELEMENTS.FORMS.FORGOT_PASSWORD.addEventListener('submit', (e) => this.getVerificationCode(e));
         this.ELEMENTS.FORMS.RESET_PASSWORD.addEventListener('submit', (e) => this.resetPassword(e));
         this.modal._element.addEventListener('show.bs.modal', () => this.#showingPreviewModal());
         this.modal._element.addEventListener('hidden.bs.modal', () => this.#hidingPreviewModal());
+        AuthService.initGoogleSignInButton(this.ELEMENTS.GOOGLE_SIGN_IN_BTN,);
+        window.modals.login = this; // Expose the modal instance globally for easy access
         return true;
     }
 }

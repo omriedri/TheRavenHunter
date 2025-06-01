@@ -89,12 +89,10 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="fb-btn fb-register-btn p-0 ml-3" onclick="facebook.login()">
-                        <img src="<?= PathHelper::image('fb-continiue-btn.png') ?>" alt="Continue with Facebook">
-                    </button>
                     <button type="button" class="btn btn-secondary cancel d-mv-none"
                         data-bs-dismiss="modal">Cancel</button>
                     <button type="submit" class="btn btn-primary">Register</button>
+                    <div id="googleRegisterBtn" class="g_id_signin"></div>
                 </div>
             </form>
         </div>

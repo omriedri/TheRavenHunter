@@ -11,6 +11,7 @@ export class UserInterface {
         navbar: document.querySelector('nav .nav-container'),
         profile: document.querySelector('profile'),
         pages: document.querySelectorAll('.page'),
+        sidebar_btn: document.querySelector('nav .trigger-button'),
         logout_btns: document.querySelectorAll('[data-action="logout"]')
     }
 
@@ -52,6 +53,17 @@ export class UserInterface {
      */
     initEvents() {
         window.addEventListener('resize', () => this.#setBodyView());
+        this.static.ELEMENTS.sidebar_btn?.addEventListener('click', () => this.revealSidebar());
+    }
+
+    /**
+     * Reveal the sidebar
+     */
+    revealSidebar() {
+        if (this.static.ELEMENTS.navbar.classList.contains('hide')) {
+            this.static.ELEMENTS.navbar.classList.remove('hide');
+            this.static.ELEMENTS.nav.classList.add('active');
+        }
     }
 
     /**
@@ -95,7 +107,7 @@ export class UserInterface {
 
 
     #menuNavigation() {
-        UserInterface.ELEMENTS.nav.querySelectorAll('button').forEach(item => {
+        UserInterface.ELEMENTS.nav.querySelectorAll('.menu-item-list button').forEach(item => {
             item.addEventListener('click', (e) => {
                 const target = e.target instanceof HTMLButtonElement ? e.target : e?.target.closest('button');
                 const selected = target.getAttribute('data-target');
@@ -118,10 +130,6 @@ export class UserInterface {
             MenuItem.addEventListener('click', () => {
                 this.static.ELEMENTS.nav.classList.remove('active');
                 this.static.ELEMENTS.navbar.classList.add('hide');
-                setTimeout(() => {
-                    this.static.ELEMENTS.nav.classList.add('active');
-                    this.static.ELEMENTS.navbar.classList.remove('hide');
-                }, 300);
             }); 
         });
     }
@@ -182,6 +190,4 @@ export class UserInterface {
     static isMobile() {
         return window.innerWidth <= 768;
     }
-
-    static isMo
 }
