@@ -534,10 +534,10 @@ footer a:hover, footer a:focus {
 
 /* ----- APPEARENCE ----- */
 
-body [theme="1"] { background-image: url('/public/images/backgrounds/sunrise.jpg'); }
-body [theme="2"] { background-image: url('/public/images/backgrounds/opensky.jpg'); }
-body [theme="3"] { background-image: url('/public/images/backgrounds/beach.jpg'); }
-body [theme="4"] { background-image: url('/public/images/backgrounds/mountainsvalley.jpg'); }
+body [theme="1"] appearance img { background-image: url('/public/images/backgrounds/sunrise.jpg'); }
+body [theme="2"] appearance img { background-image: url('/public/images/backgrounds/opensky.jpg'); }
+body [theme="3"] appearance img { background-image: url('/public/images/backgrounds/beach.jpg'); }
+body [theme="4"] appearance img { background-image: url('/public/images/backgrounds/mountainsvalley.jpg'); }
 
 appearance {
     position: fixed;

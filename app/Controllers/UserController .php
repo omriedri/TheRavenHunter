@@ -125,7 +125,9 @@ class UserController extends BaseController {
             if(AuthService::guest()) throw new AuthException();
             $data = self::getReadyData(Settings::VALIDATION_RULES);
             if(empty($data)) throw new DataValidationException('No data to update');
-            AuthService::user()->getSettings()->fill($data)->save();
+            $UserSettings = AuthService::user()->getSettings();
+            $UserSettings->fill($data)->save();
+            $Response->setData($UserSettings->getPublicData());
             $Response->setSuccess('The settings were updated successfully');
         } catch (\Throwable $e) {
             $Response->handleException($e);

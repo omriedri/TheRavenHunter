@@ -35,9 +35,6 @@
                 </form>
 
             </div>
-            <div class="col birdCol position-relative">
-                <img src="public/images/bird.gif" alt="Flying bird" class="w-100 top-50">
-            </div>
         </div>
     </div>
 </about>

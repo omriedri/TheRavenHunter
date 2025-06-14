@@ -87,14 +87,14 @@
                 <div class="modal-body row text-left">
                     <div class="col-md-9">
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-6">
                                 <div class="form-group-sm firstname required">
                                     <label for="firstname">First Name <span class="text-danger"> *</span></label>
                                     <input class="form-control form-control-sm" type="text" name="first_name"
                                         required="required" aria-required="true" maxlength="15">
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-6">
                                 <div class="form-group-sm lastname">
                                     <label for="lastname">Last Name</label>
                                     <input class="form-control form-control-sm" type="text" name="last_name"
@@ -103,18 +103,18 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-6">
                                 <div class="form-group-sm gender">
-                                    <label for="country">Your Gender </label>
+                                    <label for="country">Gender </label>
                                     <select class="form-control form-control-sm" name="gender" name="gender"
                                         required>
-                                        <option value="1">Male</i></option>
-                                        <option value="2">Female</i></option>
-                                        <option value="3">Other</i></option>
+                                        <option value="1">♂️ Male</i></option>
+                                        <option value="2">♀️ Female</i></option>
+                                        <option value="3">⚤ Other</i></option>
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-6">
                                 <div class="form-group-sm replace-passwords required">
                                     <label for="email">Replace Password?</label>
                                     <select class="form-control form-control-sm" id="changePasswordSelect"
@@ -127,14 +127,14 @@
                         </div>
                         <fieldset class="passwords" disabled="disabled">
                             <div class="row passwords-row" expanded="false">
-                                <div class="col-md-6">
+                                <div class="col-6">
                                     <div class="form-group-sm password required">
                                         <label for="password">New Password <span class="text-danger"> *</span></label>
                                         <input class="form-control form-control-sm" type="password" name="password"
                                             autocomplete="new-password" maxlength="25">
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-6">
                                     <div class="form-group-sm repassword required">
                                         <label for="repassword">Confirm Password <span class="text-danger"> *</span>
                                         </label>
@@ -151,8 +151,7 @@
                                 <label for="image" class="d-block">Profile Image</label>
                                 <input type="file" name="image" accept="image/*" hidden>
                                 <button href="#" class="image-button btn btn-link p-0">
-                                    <img src="<?= PathHelper::image('imageUpload.jpg'); ?>" class="img-thumbnail" width="100"
-                                        height="100" alt="Your profile image">
+                                    <img src="<?= PathHelper::image('imageUpload.jpg'); ?>" class="img-thumbnail" alt="Your profile image" width="500">
                                 </button>
                             </div>
                             <p class="alert-danger error p-1 mt-1 mb-0 opacity-0 text-center"></p>
