@@ -20,7 +20,7 @@
     <link rel="manifest" href="/manifest.json">
 
     <!-- Theme color for status bar -->
-    <meta name="theme-color" content="#ffe4c4">
+    <!-- <meta name="theme-color" content="#ffe4c4"> -->
 
     <!-- Add to home screen support for iOS -->
     <meta name="mobile-web-app-capable" content="yes">
@@ -43,7 +43,7 @@
 
     <!-- WhatsApp uses Open Graph tags -->
     <meta name="msapplication-TileColor" content="#ffe4c4">
-    <meta name="msapplication-TileImage" content="/public/images/manifest/icon-192.png">
+    <meta name="msapplication-TileImage" content="https://ravenhunter.omriedri.co.il/public/images/manifest/icon-192.png">
     <meta name="msapplication-config" content="browserconfig.xml">
 
 
