@@ -88,7 +88,13 @@ export class Game {
     #setGame() {
         this.#seCageSize();
         this.#setBirdPosition();
+        this.#setGameSounds();
         this.Timer.init();
+    }
+
+    #setGameSounds() {
+        const soundOn = MainInstance.getSettings()?.sounds !== false;
+        Object.values(this.SOUNDS).forEach(audio => audio.muted = !soundOn );
     }
 
     #seCageSize() {
@@ -127,24 +133,21 @@ export class Game {
 
     #shot() {
         if(!this.isRunning()) return;
-        this.SOUNDS.SHOT.currentTime = 0;
-        this.SOUNDS.SHOT.play();
+        this.#playSoundEffect(this.SOUNDS.SHOT);
     }
 
     #hitBird(event) {
         if(!this.isRunning()) return;
-        if(event instanceof MouseEvent && !this.#isMouseOverTheBird(event)) return;
+        if(event instanceof MouseEvent && !this.#isMouseOverTheTarget(event)) return;
         this.hitCounts++;
         this.#setBirdLifePrecentage();
         if(this.hitCounts >= this.#getRequiredHitsByDifficulty()) {
-            this.SOUNDS.SHOT.currentTime = 0;
-            this.SOUNDS.SHOT.play();
-            this.SOUNDS.KILL.play();
+            this.#playSoundEffect(this.SOUNDS.SHOT);
+            this.#playSoundEffect(this.SOUNDS.KILL);
             this.end();
             return;
         }
-        this.SOUNDS.HIT.currentTime = 0;
-        this.SOUNDS.HIT.play();
+        this.#playSoundEffect(this.SOUNDS.HIT);
         this.#moveBird();
     }
 
@@ -153,7 +156,7 @@ export class Game {
      * @param {MouseEvent} e
      * @returns {boolean}
      */
-    #isMouseOverTheBird(e) {
+    #isMouseOverTheTarget(e) {
         return Utilities.isMouseOverElement(this.static.ELEMENTS.BIRD, e.clientX, e.clientY);
     }
 
@@ -182,7 +185,8 @@ export class Game {
     }
 
     restart() {
-        this.start();
+        this.reset();
+        setTimeout(() => this.start(), 500);
     }
 
     abort() {
@@ -229,8 +233,7 @@ export class Game {
     gameOver() {
         this.abort();
         this.GameOverModal.launch();
-        this.SOUNDS.OVER.currentTime = 0;
-        this.SOUNDS.OVER.play();
+        this.#playSoundEffect(this.SOUNDS.OVER);
     }
 
     #showGameEndingModal() {
@@ -351,5 +354,16 @@ export class Game {
             return;
         }
         return response.data;
+    }
+
+    /**
+     * Play a sound
+     * @param {Audio} sound 
+     */
+    #playSoundEffect(sound) {
+        if(!sound || !(sound instanceof Audio)) return;
+        if(!MainInstance.getSettings()?.sounds) return;
+        sound.currentTime = 0;
+        sound.play();
     }
 }

@@ -10,7 +10,7 @@
 
     <div class="wrapper">
         <div class="recordsHeader">
-            <div class="d-flex bg-dark text-white text-center fw-bold w-100">
+            <div class="d-flex bg-dark text-white text-center fw-bold w-100 py-2 px-1">
                 <div class="col-5 col-md-3 text-start ms-1">Player</div>
                 <div class="col-3 d-none d-md-flex">Performd at</div>
                 <div class="col-2 col-sm-1">Time</div>

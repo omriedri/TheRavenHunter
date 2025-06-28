@@ -1,159 +1,121 @@
-/* DEFAULT */
-
-[theme=default].mobile-view game #timer timer {
-    color: white;
-    text-shadow: 0 0 1px black, 0 0 3px black, 0 0 5px black;
+body[theme="1"] settings .wrappers {
+    background: bisque;
 }
 
-[theme=default] settings .wrappers {
-    background-color: whitesmoke;
-}
-
-[theme=default] about .content {
+body[theme="1"] about .content {
     color: white;
     text-shadow: 0 0 2px #000, 0 0 4px #000
 }
 
-[theme=default] about .contentCol h4, [theme=default] about .contentCol h5 {
+body[theme="1"] about .contentCol h4, 
+body[theme="1"] about .contentCol h5 {
     color: sandybrown;
     filter: brightness(1.5);
 }
 
-[theme=default] about .content a {
+body[theme="1"] about .content a {
     color: sandybrown;
     filter: brightness(1.5) contrast(2);
 }
 
-[theme=default] footer span {
+body[theme="1"] footer span {
     color: whitesmoke;
     ;
 }
 
-[theme=default] footer a {
+body[theme="1"] footer a {
     color: #d39e00
 }
 
-[theme=default] footer a:hover, body.default footer a:focus {
+body[theme="1"] footer a:hover, 
+body[theme="1"] footer a:focus {
     color: #ffc107;
 }
 
 /* OPENSKY */
 
-[theme=opensky] home button#start {
+body[theme="2"] home button#start {
     background: #f9f5f2;
 }
 
-[theme=opensky] game #timer>* {
-    background: #313437;
-    color: #FFF
+
+body[theme="2"] settings .wrappers {
+    background: #f9f8f4 !important;
 }
 
-[theme=opensky].mobile-view game #timer timer {
-    color: black;
-}
-
-[theme=opensky].mobile-view game #timer restart {
-    z-index: 10;
-    background: #dee2e6;
-    filter: drop-shadow(1px 1px 2px black);
-}
-
-[theme=opensky] settings .wrappers {
-    background: #efefef;
-}
-
-[theme=opensky] modal {
+body[theme="2"] modal {
     background: #FFF;
 }
 
-/* MOUNTAINS VALLEY */
 
-[theme=mountainsvalley] home button#start {
-    background: #f3f1e5;
-}
-
-[theme=mountainsvalley] game #timer>* {
-    background: #343a40;
-    color: #FFF;
-}
-
-[theme=mountainsvalley].mobile-view game #timer restart {
-    border-color: whitesmoke;
-}
-
-[theme=mountainsvalley].mobile-view game #timer restart button{
-    color: #FFF;
-}
-
-[theme=mountainsvalley] settings .wrappers {
-    background: #efefef;
-}
-
-[theme=mountainsvalley] modal {
-    background: #e4e5df;
-}
-
-[theme=mountainsvalley] footer span {
-    color: #FFF;
-}
-
-[theme=mountainsvalley] footer a {
-    color: #73b7ff;
-}
 
 /* BEACH */
 
-[theme=beach] .heading {
-    color: wheat;
+body[theme="3"] .heading {
+    color: #fff2dc;
     text-shadow: 0 0 5px #000;
 }
 
-[theme=beach] header h1.title {
-    color: #FFF;
+body[theme="3"] header h1.title {
+    color: #fff2dc;
     text-shadow: 1px 1px 5px #000;
 }
 
-[theme=beach] header nav button.trigger-button {
-    color: #FFF;
+body[theme="3"] header nav button.trigger-button {
+    color: #fff2dc;
 }
 
-[theme=beach] header profile {
+body[theme="3"] header profile {
+    color: #fff2dc;
+    text-shadow: 0 0 2px #000, 0 0 4px #000;
+}
+
+body[theme="3"] header profile .profile .user-avatar-wrap {
+    border-color: #fff2dc;
+}
+
+body[theme="3"] home button#start {
+    background: #fff2dc;
+}
+
+body[theme="3"] settings .wrappers {
+    background: #fff2dc;
+}
+
+body[theme="3"] about .contentCol {
     color: white;
     text-shadow: 0 0 2px #000, 0 0 4px #000;
 }
 
-[theme=beach] header profile .profile .user-avatar-wrap {
-    border-color: #FFF;
+body[theme="3"] about .contentCol h4, 
+body[theme="3"] about .contentCol h5 {
+    color: #fff2dc
 }
 
-[theme=beach] home button#start {
-    background: #f9f5f2;
+body[theme="3"] about .contentCol a {
+    color: yellow;
 }
 
-[theme=beach] game #timer>*, [theme=beach] modal {
-    background: #FFF;
+
+/* MOUNTAINS VALLEY */
+
+body[theme="4"] home button#start {
+    background: #f3f1e5;
 }
 
-[theme=beach].mobile-view game #timer restart {
-    z-index: 10;
-    color: black;
-    background: #FFF;
-    filter: drop-shadow(1px 1px 2px black);
-}
 
-[theme=beach] settings .wrappers {
+body[theme="4"] settings .wrappers {
     background: #efefef;
 }
 
-[theme=beach] about .contentCol {
-    color: white;
-    text-shadow: 0 0 2px #000, 0 0 4px #000;
+body[theme="4"] modal {
+    background: #e4e5df;
 }
 
-[theme=beach] about .contentCol h4, [theme=beach] about .contentCol h5 {
-    color: wheat
+body[theme="4"] footer span {
+    color: #FFF;
 }
 
-[theme=beach] about .contentCol a {
-    color: yellow;
+body[theme="4"] footer a {
+    color: #73b7ff;
 }

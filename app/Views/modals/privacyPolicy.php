@@ -13,7 +13,7 @@
                         information
                         (&quot;Personal
                         Information&quot;) you may provide on the <a target="_blank" rel="nofollow"
-                            href="https://thebirdcatcher.omriedri.co.il">thebirdcatcher.omriedri.co.il</a> website
+                            href="https://ravenhunter.omriedri.co.il">ravenhunter.omriedri.co.il</a> website
                         (&quot;Website&quot;),
                         &quot;The Bird Catcher&quot; mobile application (&quot;Mobile Application&quot;) and any of
                         their

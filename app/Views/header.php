@@ -1,9 +1,7 @@
 <header>
     <div class="cover-wraaper position-fixed start-0 top-0 end-0 w-100">
         <div class="cover d-flex justify-content-center align-items-center">
-            <a href="/">
-                <img src="public/images/cover.png" alt="Logo">
-            </a>
+            <img class="cover" src="public/images/cover.png" alt="Logo">
         </div>
     </div>
 

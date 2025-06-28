@@ -22,13 +22,13 @@ settings .wrappers h4 {
     border-radius: 25px 25px 0 0;
 }
 
-settings input[type=radio], settings input[type=checkbox] {
+settings input[type=radio], 
+settings input[type=checkbox] {
     transform: scale(1.5);
     margin-right: 8px;
 }
 
-settings .wrappers {
-    background: bisque;
+body[theme] settings .wrappers {
     padding: 1.5em;
     border-radius: 25px;
     margin: 20px 10px;
@@ -41,11 +41,14 @@ settings .wrappers p {
     margin: 0;
 }
 
-settings .wrappers input[type=radio]:checked~label, settings .wrappers input[type=checkbox]:checked~label {
+settings .wrappers input[type=radio]:checked~label, 
+settings .wrappers input[type=checkbox]:checked~label {
     font-weight: 700;
 }
 
-settings .wrappers input:hover~.settingDetails, settings .wrappers input:focus~.settingDetails, settings .wrappers label:hover~.settingDetails {
+settings .wrappers input:hover~.settingDetails, 
+settings .wrappers input:focus~.settingDetails, 
+settings .wrappers label:hover~.settingDetails {
     opacity: 1;
 }
 

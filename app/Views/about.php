@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col contentCol">
                 <h4>JUST FOR THE FUN</h4>
-                <p><strong>The Bird Catcher</strong> simply made for let the players spend there time having
+                <p><strong>The Raven Hunter</strong> simply made for let the players spend there time having
                     fun with a bit of concentration. Ideal for parents who want to provide a treat for their children.
                 </p>
                 <p><strong>Be aware, </strong>the computer equipment of the players may be under a risk to get damage,

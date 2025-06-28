@@ -44,6 +44,7 @@ export class UserInterface {
         this.#menuNavigation();
         this.#hidNavbarOnClick();
         this.#implementLogoutButtons();
+        this.#handleLogoReload();
         Records.ELEMENTS.select.addEventListener('change', () => Records.print());
         this.initEvents();
     }
@@ -141,6 +142,18 @@ export class UserInterface {
                     Home.switchVisibilityByUserState(false))
             )
         );
+    }
+
+    #handleLogoReload() {
+        this.static.ELEMENTS.logo?.addEventListener('click', (e) => {
+            if(!(e.target instanceof HTMLImageElement)) return;
+            e.preventDefault();
+            if (this.static.PAGES.HOME.classList.contains('active')) {
+                location.reload();
+            } else {
+                this.static.navigateTo(this.static.PAGES.HOME);
+            }
+        });
     }
 
     /**
